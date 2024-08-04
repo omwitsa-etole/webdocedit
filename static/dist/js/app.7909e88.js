@@ -13891,13 +13891,15 @@ async function renderImage(imageUrl, canvasId) {
 									}
 								}
 								if(fileGroups){
+									fileGroups.removeAttribute("style");
 									fileGroups.style.display = 'block';
+									fileGroups.setAttribute("style","display:block;")
 									fileGroups.innerHTML = ''
 									for(let i=0;i<n.pdf_page_number;i++){
 										imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/${i+1}/150`;
-										fileGroups.innerHTML += `<div class="file file--split tooltip--top" id="${t.id}" rel="user" data-size="171941" data-extension="PDF" title="image size..."><div class="file__actions"><a class="file__btn rotate tooltip--top tooltip" data-rotate="0" title="Rotate"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"><path d="M11.328 6.364l1.24-1.2c.79.98 1.283 2.113 1.433 3.288h-1.775c-.123-.735-.43-1.454-.896-2.088zm.896 3.778H14c-.15 1.175-.633 2.308-1.424 3.288l-1.24-1.2c.457-.634.765-1.344.888-2.088zm-.888 4.497C10.318 15.4 9.13 15.856 7.9 16v-1.716a5.31 5.31 0 0 0 2.162-.871l1.266 1.226zM6.152 2.595V0l4 3.846-4 3.76V4.302c-2.496.406-4.394 2.485-4.394 4.995s1.898 4.59 4.394 4.995V16C2.68 15.586 0 12.746 0 9.297s2.68-6.29 6.152-6.703z" fill="#47474F" fill-rule="evenodd"></path></svg></a><a class="file__btn remove tooltip--top tooltip" title="Remove this file"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon fill="#47474F" fill-rule="evenodd" points="12 1.208 10.79 0 6 4.792 1.21 0 0 1.208 4.79 6 0 10.792 1.21 12 6 7.208 10.79 12 12 10.792 7.21 6"></polygon></svg></a></div><div class="file__canvas"><canvas id="cover-${t.id}" width="99" height="140" class="pdf pdf "></canvas></div><div class="file__info"><span class="file__info__name">${n.filename}</span></div></div>`
+										fileGroups.innerHTML += `<div class="file file--split tooltip--top" id="${t.id}" rel="user" data-size="171941" data-extension="PDF" title="image size..."><div class="file__actions"><a class="file__btn rotate tooltip--top tooltip" data-rotate="0" title="Rotate"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"><path d="M11.328 6.364l1.24-1.2c.79.98 1.283 2.113 1.433 3.288h-1.775c-.123-.735-.43-1.454-.896-2.088zm.896 3.778H14c-.15 1.175-.633 2.308-1.424 3.288l-1.24-1.2c.457-.634.765-1.344.888-2.088zm-.888 4.497C10.318 15.4 9.13 15.856 7.9 16v-1.716a5.31 5.31 0 0 0 2.162-.871l1.266 1.226zM6.152 2.595V0l4 3.846-4 3.76V4.302c-2.496.406-4.394 2.485-4.394 4.995s1.898 4.59 4.394 4.995V16C2.68 15.586 0 12.746 0 9.297s2.68-6.29 6.152-6.703z" fill="#47474F" fill-rule="evenodd"></path></svg></a><a class="file__btn remove tooltip--top tooltip" title="Remove this file"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon fill="#47474F" fill-rule="evenodd" points="12 1.208 10.79 0 6 4.792 1.21 0 0 1.208 4.79 6 0 10.792 1.21 12 6 7.208 10.79 12 12 10.792 7.21 6"></polygon></svg></a></div><div class="file__canvas"><canvas id="cover-${t.id}-${i+1}" width="99" height="140" class="pdf pdf "></canvas></div><div class="file__info"><span class="file__info__name">${n.file}</span></div></div>`
 										
-										await renderImage(imageUrl, `cover-${t.id}`);
+										await renderImage(imageUrl, `cover-${t.id}-${i+1}`);
 									}
 								}
 							}
