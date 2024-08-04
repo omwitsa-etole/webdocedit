@@ -19296,10 +19296,18 @@ async function renderImage(imageUrl, canvasId) {
 				  if (e.stopPropagation) {
 					e.stopPropagation();
 				  }
-				  if (draggedElement !== e.target) {
-					draggedElement.innerHTML = e.target.innerHTML;
-					e.target.innerHTML = e.dataTransfer.getData('text/html');
+				  
+				  const target = e.target.closest('.page');
+				  if (draggedElement !== target) {
+					// Swap positions in the DOM
+					const draggedElementParent = draggedElement.parentNode;
+					const targetParent = target.parentNode;
+
+					const draggedElementNextSibling = draggedElement.nextElementSibling === target ? draggedElement : draggedElement.nextElementSibling;
+					targetParent.insertBefore(draggedElement, target.nextElementSibling);
+					draggedElementParent.insertBefore(target, draggedElementNextSibling);
 				  }
+
 				  return false;
 				}
 
