@@ -19250,7 +19250,7 @@ async function renderImage(imageUrl, canvasId) {
 										</svg>
 									</a>
 								</div>
-								<div class="page__container">
+								<div class="page__container" draggable="true">
 									<div class="page__element">
 										<div class="page__canvas">
 											<canvas id="page-A-${i+1}" width="70" height="100" data-file="${e}" data-page="${i+1}" data-width="596.04" data-height="842.88" style="background-image: none;"></canvas>
@@ -19270,7 +19270,43 @@ async function renderImage(imageUrl, canvasId) {
 					`
 					imageUrl = `${apiServer}/v1/pdfrender/${t.pdf_page_number}/${t.server_filename.replace(".pdf","")}/${i+1}/150`;
 					await renderImage(imageUrl,`page-A-${i+1}`)
-					
+					const pageContainer = document.querySelector(`#A${i + 1} .page__container`);
+					  pageContainer.addEventListener('dragstart', handleDragStart);
+					  pageContainer.addEventListener('dragover', handleDragOver);
+					  pageContainer.addEventListener('drop', handleDrop);
+					  pageContainer.addEventListener('dragend', handleDragEnd);
+				}
+				let draggedElement = null;
+
+				function handleDragStart(e) {
+				  draggedElement = e.target;
+				  e.dataTransfer.effectAllowed = 'move';
+				  e.dataTransfer.setData('text/html', e.target.innerHTML);
+				}
+
+				function handleDragOver(e) {
+				  if (e.preventDefault) {
+					e.preventDefault();
+				  }
+				  e.dataTransfer.dropEffect = 'move';
+				  return false;
+				}
+
+				function handleDrop(e) {
+				  if (e.stopPropagation) {
+					e.stopPropagation();
+				  }
+				  if (draggedElement !== e.target) {
+					draggedElement.innerHTML = e.target.innerHTML;
+					e.target.innerHTML = e.dataTransfer.getData('text/html');
+				  }
+				  return false;
+				}
+
+				function handleDragEnd(e) {
+				  document.querySelectorAll('.page__container').forEach(container => {
+					container.classList.remove('over');
+				  });
 				}
 			}
 			
