@@ -13902,6 +13902,11 @@ async function renderImage(imageUrl, canvasId) {
 									fileGroups.removeAttribute("style");
 									fileGroups.style.display = 'block';
 									fileGroups.setAttribute("style","display:block;")
+									setTimeout(()=>{
+										fileGroups.removeAttribute("style");
+										fileGroups.style.display = 'block';
+										fileGroups.setAttribute("style","display:block;")
+									},1000)
 								}
 							}
 							
