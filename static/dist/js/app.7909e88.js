@@ -13889,6 +13889,9 @@ async function renderImage(imageUrl, canvasId) {
 										filePages.innerHTML += `<div class="page file${t.id}" id="${t.id}${i+1}" data-page="${i+1}" data-file="${t.id}" style=""><div class="page__container"><div class="page__element"><div class="page__canvas"><canvas id="page-${t.id}-${i+1}" width="108" height="140" data-file="${t.id}" data-page="${i+1}" data-width="612" data-height="792" style="background-image: none;"></canvas><div class="file__bullet file__bullet--top file__bullet--left" title="Watermark will be placed on top left"></div></div></div></div></div>`
 										await renderImage(imageUrl, `page-${t.id}-${i+1}`);
 									}
+									setTimeout(()=>{
+										$(".numPages").html(`${n.pdf_page_number}`)
+									},1000)
 								}
 								if(fileGroups){
 									
@@ -13906,6 +13909,7 @@ async function renderImage(imageUrl, canvasId) {
 										fileGroups.removeAttribute("style");
 										fileGroups.style.display = 'block';
 										fileGroups.setAttribute("style","display:block;")
+										$(".numPages").html(`${n.pdf_page_number}`)
 									},1000)
 								}
 							}
