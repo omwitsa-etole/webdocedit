@@ -1,0 +1,511 @@
+
+{%extends 'main.html'%}
+
+{%block content%}
+<link href="/static/dist/css/admin.7909e88.css" rel="stylesheet"> 
+
+<style>
+    .footer-main{display:none;}
+    #uploader a{background-color: aqua;}
+</style>
+
+<div id="mainAdmin" class="main-sidebar">
+            <div class="main-sidebar__sidebar">
+                <div class="sidebar" style="width: 248px; max-height: calc(-60px + 100vh); height: 784.5px;">
+
+    <div class="sidebar__user">
+        <div class="avatar">
+            <!--
+            <div class="avatar__image">
+                <img src="https://www.webdocedit.com/img/avatar/avatar-default.png">
+            </div>
+            -->
+            <div class="user__avatar user__avatar--registered">
+    <div class="user__avatar__edit">
+        <img id="avatarPreloader" class="user__avatar__edit__preload" src="/static/img/svg_icons/preload.svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12">
+            <path d="M0 9.002v2.368h2.368l6.986-6.985-2.37-2.37zm11.185-6.45a.63.63 0 0 0 0-.891L9.707.185a.63.63 0 0 0-.891 0L7.66 1.34l2.37 2.37 1.156-1.156z" fill="#383E45" fill-rule="evenodd"></path>
+        </svg>
+        <img id="avatarImage" src="{{manifest['user'].get('picture')}}" width="110" height="110">
+    </div>
+    <input id="uploadAvatar" data-max-size="2048" type="file">
+</div>            <div class="avatar__information">
+                <div class="avatar__information__role avatar__information__role--registered">
+                    Registered                </div>
+                <div class="avatar__information__name">
+                   {{manifest['user']['name']}}              </div>
+            </div>
+        </div>
+    </div>
+
+        <ul class="sidebar__menu">
+        <li class="sidebar__menu__subtitle">Profile</li>
+        <li class="sidebar__menu__item ">
+            <a href="/user"><img src="/static/img/icons/admin/account.svg">My account</a>
+        </li>
+        <li class="sidebar__menu__item ">
+            <a href="/user/security"><img src="/static/img/icons/admin/password.svg">Security</a>
+        </li>
+                    <li class="sidebar__menu__item sidebar__menu__item--active">
+                <a href="/user/team"><img src="/static/img/icons/admin/team.svg">Team</a>
+            </li>
+        
+        <li class="sidebar__menu__subtitle">Activity</li>
+
+        <li class="sidebar__menu__item ">
+            <a href="/user/history"><img src="/static/img/icons/admin/history.svg">Last tasks</a>
+        </li>
+
+                    <li class="sidebar__menu__subtitle">Signatures</li>
+
+            <li class="sidebar__menu__item ">
+                <a href="/user/signatures"><img src="/static/img/icons/admin/signature-overview.svg">Overview</a>
+            </li>
+            <li class="sidebar__menu__item ">
+                <a href="/user/signatures/requests"><img src="/static/img/icons/admin/signature-sent.svg">Sent</a>
+            </li>
+            <li class="sidebar__menu__item ">
+                <a href="/user/signatures/pending"><img src="/static/img/icons/admin/signature-inbox.svg">Inbox</a>
+            </li>
+            <li class="sidebar__menu__item ">
+                <a href="/user/signatures/signed"><img src="/static/img/icons/admin/signature-signed.svg">Signed</a>
+            </li>
+                        <li class="sidebar__menu__item ">
+                <a href="/user/signatures/templates"><img src="/static/img/icons/admin/signature-templates.svg">Templates</a>
+            </li>
+            <li class="sidebar__menu__item ">
+                <a href="/user/contacts"><img src="/static/img/icons/admin/signature-contacts.svg">Contacts</a>
+            </li>
+
+            <li class="sidebar__menu__item ">
+                <a href="/user/signatures/settings"><img src="/static/img/icons/admin/signature-settings.svg">Settings</a>
+            </li>
+                <li class="sidebar__menu__subtitle">Billing</li>
+
+                    <li class="sidebar__menu__item ">
+                <a href="/user/plan"><img src="/static/img/icons/admin/package.svg">Plans &amp; Packages</a>
+            </li>
+                <li class="sidebar__menu__item ">
+            <a href="/user/business"><img src="/static/img/icons/admin/business.svg">Business details</a>
+        </li>
+        <li class="sidebar__menu__item ">
+            <a href="/user/invoices"><img src="/static/img/icons/admin/card.svg">Invoices</a>
+        </li>
+    </ul>
+</div>            </div>
+            <div class="main-sidebar__content">
+                <div class="container">
+                    
+<style>
+
+    .editable {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-decoration-color: grey;
+        cursor: pointer;
+    }
+
+    .editable:hover {
+        text-decoration-color: red;
+    }
+
+    .editable:focus {
+        text-decoration: none;
+        background: white;
+        border: 1px solid #eee;
+        padding: 2px 4px;
+    }
+
+    [placeholder]:empty::before {
+        content: attr(placeholder);
+        color: #555;
+    }
+
+    .ico {
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+
+    .tableactions {
+        border-style: solid;
+        border-color: #EEE;
+        border-width: 1px 1px 0 1px;
+        padding: 8px 14px;
+    }
+
+    .td--sm {
+        width: 24px;
+        padding-right: 0;
+    }
+    .td--md {
+        width: 30%;
+    }
+    .td--lg {
+        width: 30%;
+    }
+
+    .card__actions .small {
+        margin-right: auto;
+    }
+
+    #licencesPricing {
+        display: none;
+    }
+
+    [data-batch-actions] {
+        display: none;
+    }
+
+    .batch-action {
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+    }
+
+    .batch-action svg {
+        margin-right: 4px;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    .batch-action:hover svg{
+        opacity: 1;
+    }
+
+    [data-remove], [data-field-rel] {
+        cursor: pointer;
+    }
+
+    .no-results{
+        text-align: center;
+    }
+    .breadcrumb{
+        font-size: 24px;
+    }
+
+    .card__disabled {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+        z-index: 1;
+    }
+    
+    .dialog__content [change-invite-role-select],
+    .dialog__content [change-member-role-select],
+    .dialog__content [change-invite-team-select],
+    .dialog__content [change-member-team-select]{
+        border: 1px solid #d7d7da;
+        border-radius: 4px;
+        padding: 12px;
+        margin: 0 auto;
+        min-width: 100px;
+        min-height: 46px;
+        width: fit-content;
+    }
+
+    .badge--warning{
+        margin-left: 0;
+    }
+
+    .view-mode{
+        display: inline-flex;
+        align-items: center;
+        margin: auto 12px;
+    }
+
+    .view-mode a{
+        display: flex;
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border-radius: 4px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+    }
+    .view-mode a svg path{
+        fill: #707078;
+    }
+
+    .view-mode a.active{
+        background: white;
+    }
+
+    .view-mode a.active svg path{
+        fill: #161616;
+    }
+
+    .view-mode a:hover{
+        background: white;
+    }
+
+    .wait.full{
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        opacity: 0.6;
+    }
+
+</style>
+<div class="block">
+    <div class="block__container">
+        <div class="card">
+            <div class="card__header">
+                <h2 class="card__title">Invite users to the {{manifest['user']['name']}}workspace</h2>
+                <div class="card__header__action">
+                    <button class="link" data-toggle="modal" data-target="#importInvitesModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" width="12" height="12" style="margin-right: 8px;" viewBox="0 0 16 16"><path fill-opacity="0" fill="currentColor" d="M0 0h16v16H0z"></path><path fill="currentColor" d="M3.575 3.894l3.699-3.6a1.04 1.04 0 0 1 1.455 0l3.699 3.6a.98.98 0 0 1 .28.972c-.094.349-.375.623-.734.714s-.741-.013-.999-.273L9.027 3.415V12.2c0 .552-.46 1-1.027 1s-1.027-.448-1.027-1V3.415L5.028 5.308c-.258.26-.64.364-.999.273s-.64-.365-.734-.714a.98.98 0 0 1 .28-.972h0zM15.5 15c0 .552-.46 1-1.027 1H1.527C.96 16 .5 15.552.5 15v-2.8c0-.552.46-1 1.027-1s1.027.448 1.027 1V14h10.89v-1.8c0-.552.46-1 1.027-1s1.027.448 1.027 1V15z" fill-rule="nonzero"></path></svg>Import users                    </button>
+                </div>
+            </div>
+
+            <div class="card__body">
+                <div class="tableactions d-flex justify-content-start">
+    <div class="checkbox">
+        <input data-batch-select="" type="checkbox" name="selectAll" id="selectAll" class="input">
+        <label for="selectAll"></label>
+    </div>
+    <div data-batch-enable="">
+        <small>Select multiple users</small>
+    </div>
+    <div data-batch-actions="">
+                    <div data-batch-action="team" class="batch-action tooltip" data-title="Set the team for selected users" title="Remove the selected users" data-tag-value="5903" style="position: relative;">
+                <svg width="16" height="14">
+                    <use xlink:href="/static/img/icons/svg-icons/team.svg#main"></use>
+                </svg>
+            </div>
+                <div data-batch-action="role" class="batch-action tooltip" data-title="Set role for selected users" title="Set role for the selected members" data-tag-value="4" style="position: relative;">
+            <svg width="17" height="16">
+                <use xlink:href="/static/img/icons/svg-icons/role.svg#main"></use>
+            </svg>
+        </div>
+                    <div data-batch-action="remove" class="batch-action tooltip" data-title="Remove the selected users" title="Remove the selected users">
+                <svg width="16" height="14">
+                    <use xlink:href="/static/img/icons/svg-icons/trash.svg#main"></use>
+                </svg>
+            </div>
+            </div>
+</div>                <table id="inviteTable">
+                    <thead>
+                    <tr>
+                        <th class="td--sm"></th>
+                        <th class="">Email</th>
+                        <th class="td--md">Team</th>
+                        <th class="td--md">Role</th>
+                        <th class="td--sm"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr id="stfgpqms">
+        <td class="td--sm">
+            <div class="checkbox checkbox--hover">
+                <input data-mass-action="" type="checkbox" name="inviteCheck[]" id="contact1" value="1" class="input">
+                <label for="contact1" value="1"></label>
+            </div>
+        </td>
+        <td>
+            <div class="input--icon input--email input--sm" data-input="email"><input type="text" class="input" name="invite[email]" placeholder="Email" autofocus="true" aria-required="true"></div>
+            <span data-field="email" style="display: none;"></span>
+        </td>
+        <td data-tag="team" data-tag-value="5903" style="position: relative;">
+        <div class="tag-selector"><div data-tag-active="true" class="tag-selector__active" style="position: relative; display: inline-block;">Default</div></div></td>
+        <td data-tag="role" data-tag-value="4" style="position: relative;">
+        <div class="tag-selector"><div data-tag-active="true" class="tag-selector__active" style="position: relative; display: inline-block;">Team Member</div></div></td>
+        <td>
+            <div class="d-flex justify-content-end">
+                <svg data-remove="" width="13" height="14">
+                    <use xlink:href="/static/img/icons/svg-icons/trash.svg#main"></use>
+                </svg>
+            </div>
+        </td>
+    </tr><tr id="addRow">
+                        <td class="td--sm">
+                        </td>
+                        <td>
+                            <button id="teamAddMore" class="btn btn--sm btn--grayscale">
+                                <svg aria-hidden="true" width="12" height="12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+                                <span>Add more</span>
+                            </button>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card__actions">
+                <p class="small">
+                    <span id="licencesResume"></span>
+                    <a id="licencesPricing" href="#" data-toggle="modal" data-target="#pricingModal" style="display: none;">Check prices</a>
+                </p>
+                <a href="/user/team" type="button" class="btn-link">Cancel</a>
+                <button data-invite-confirm="" class="btn" disabled="">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wait full"></div>
+<template id="inviteRowTemplate">
+    <tr>
+        <td class="td--sm">
+            <div class="checkbox checkbox--hover">
+                <input data-mass-action="" type="checkbox" name="inviteCheck[]" id="contact1" value="1" class="input">
+                <label for="contact1" value="1"></label>
+            </div>
+        </td>
+        <td>
+            <div class="input--icon input--email input--sm" data-input="email"><input type="text" class="input" name="invite[email]" placeholder="Email" autofocus="true" aria-required="true"></div>
+            <span data-field="email">email@contact.com <img src="/static/img/icons/svg-icons/edit-form.svg"></span>
+        </td>
+        <td data-tag="team">
+        </td>
+        <td data-tag="role">
+        </td>
+        <td>
+            <div class="d-flex justify-content-end">
+                <svg data-remove="" width="13" height="14">
+                    <use xlink:href="/static/img/icons/svg-icons/trash.svg#main"></use>
+                </svg>
+            </div>
+        </td>
+    </tr>
+</template>
+
+
+
+
+
+<div class="modal modal--md fade" id="pricingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="dialog__body">
+                <h3 class="dialog__title">License costs</h3>
+                <p>The cost of licences adapt according the amount of users you need to add to your team.</p>
+                <div class="text-left">
+                
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Licenses amount</th>
+        <th>Cost per license (Yearly)</th>
+    </tr>
+    </thead>
+    <tbody>
+                <tr>
+                <td>2 to 25 licences</td>
+                <td>$<span class="pricing__price__numbers">43</span></td>
+            </tr>
+                        <tr>
+                <td>26 to 50 licences</td>
+                <td>$<span class="pricing__price__numbers">41</span></td>
+            </tr>
+                        <tr>
+                <td>51 to 100 licences</td>
+                <td>$<span class="pricing__price__numbers">39</span></td>
+            </tr>
+                        <tr>
+                <td>101 to 250 licences</td>
+                <td>$<span class="pricing__price__numbers">38</span></td>
+            </tr>
+                        <tr>
+                <td>251 to 500 licences</td>
+                <td>$<span class="pricing__price__numbers">36</span></td>
+            </tr>
+                <tr>
+        <td>More than 500 licenses</td>
+        <td><a href="/contact">Contact us</a></td>
+    </tr>
+    </tbody>
+</table>                </div>
+            </div>
+            <div class="dialog__footer">
+                    <button class="btn btn--red" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div><!-- Modal impoprt invites -->
+<div class="modal fade" id="importInvitesModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="dialog__body">
+                <div class="dialog__close" data-dismiss="modal" aria-hidden="true"></div>
+                <div class="dialog__title">Import users</div>
+                <p>Invite your members using <strong>CSV</strong> and <strong>Excel</strong> files</p>
+                <div id="badImport" class="alert alert--error hidden" style="margin-bottom: 12px;">
+                    Could not import the data correctly. File does not have correct structure                </div>
+                <div id="usersExceeded" class="alert alert--error hidden" style="margin-bottom: 12px;">
+                    File size exceeded                </div>
+                <div class="row justify-content-center">
+                    <div class="btn-group">
+                        <a type="button" class="btn btn--sm btn--grayscale" href="/sample_files/team/example.xlsx">Download Excel sample</a>
+                        <button type="button" class="btn btn--sm btn--grayscale dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/sample_files/team/example.xlsx">Download Excel sample</a>
+                            <a class="dropdown-item" href="/sample_files/team/example.csv">Download CSV sample</a>
+                            <a class="dropdown-item" href="/sample_files/team/example.vcf">Download VCard sample</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center hidden" id="usersExceeded">
+                    <p></p>
+                </div>
+                <div class="dialog__action">
+                    <button id="teamUpload" type="button" class="btn">Import users</button>
+                    <input id="teamUploadInput" data-max-size="2048" type="file" style="display:none" accept=".csv,.xls,.xlsx,.vcf,.vcard">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var userConfig = {"userId":105326155,"email":"{{manifest['user']['email']}}","page":"invite","userToken":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2aWNlLmlsb3ZlcGRmLmNvbSIsImF1ZCI6IiIsImlhdCI6MTcyMTk4MDQ3OCwibmJmIjoxNzIxOTgwNDc4LCJqdGkiOjEwNTMyNjE1NX0.PHwIcZ3FJ4IuOn9dAQJzhZJnP0nKujQ5c23ykM_no4U","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJhdWQiOiIiLCJpYXQiOjE1MjMzNjQ4MjQsIm5iZiI6MTUyMzM2NDgyNCwianRpIjoicHJvamVjdF9wdWJsaWNfYzkwNWRkMWMwMWU5ZmQ3NzY5ODNjYTQwZDBhOWQyZjNfT1Vzd2EwODA0MGI4ZDJjN2NhM2NjZGE2MGQ2MTBhMmRkY2U3NyJ9.qvHSXgCJgqpC4gd6-paUlDLFmg0o2DsOvb1EUYPYx_E","startServer":"https:\/\/api.webdocedit.com","user":{"id":105326155,"name":"{{manifest['user']['name']}}","email":"{{manifest['user']['email']}}","active":1,"avatar":"{{manifest['user'].get('picture')}}","limits":{"merge":{"mb":100,"files":25},"split":{"mb":100,"files":1},"compress":{"mb":200,"files":2},"officepdf":{"mb":15,"files":1},"wordpdf":{"mb":15,"files":1},"powerpointpdf":{"mb":15,"files":1},"excelpdf":{"mb":15,"files":1},"pdfoffice":{"mb":15,"files":1},"pdfword":{"mb":15,"files":1},"pdfocr":{"mb":15,"files":1,"pages":50},"pdfpowerpoint":{"mb":15,"files":1},"pdfexcel":{"mb":15,"files":1,"pages":500},"pdfjpg":{"mb":25,"files":2},"imagepdf":{"mb":40,"files":20},"pagenumber":{"mb":100,"files":2},"watermark":{"mb":100,"files":2},"rotate":{"mb":100,"files":20},"unlock":{"mb":100,"files":2},"protect":{"mb":100,"files":2},"pdfa":{"mb":100,"files":1},"repair":{"mb":100,"files":1},"organize":{"mb":100,"files":5},"redact":{"mb":400,"files":1},"resizeimage":{"mb":200,"files":30},"compressimage":{"mb":200,"files":30},"cropimage":{"mb":90,"files":1},"converttojpg":{"mb":200,"files":30},"convertfromjpg":{"mb":200,"files":30},"rotateimage":{"mb":200,"files":30},"watermarkimage":{"mb":200,"files":30},"memeimage":{"mb":200,"files":1},"editimage":{"mb":50,"files":1},"editpdf":{"mb":100,"files":1},"sign":{"mb":50,"files":3},"upscaleimage":{"mb":6,"files":3,"pxsize":33177600},"removebackgroundimage":{"mb":6,"files":3,"pxsize":17612800},"blurfaceimage":{"mb":100,"files":10}},"mode":0,"premium":false,"country":"KE","loginkey":"dQCKApicgZe0B5mSRvHLYK6tYdt-_F9k","can_trial":false,"current_subscription":null,"team_role":"owner","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2aWNlLmlsb3ZlcGRmLmNvbSIsImF1ZCI6IiIsImlhdCI6MTcyMTk4MDQ3OCwibmJmIjoxNzIxOTgwNDc4LCJqdGkiOjEwNTMyNjE1NX0.PHwIcZ3FJ4IuOn9dAQJzhZJnP0nKujQ5c23ykM_no4U","sus_rbt":false,"custom_avatar":0,"signatures_left":0,"sms_left":0,"certificates_left":0},"action":"team"};
+    var teamData = {"allowedUsers":1,"teamMembers":1,"teamPending":0};
+    var iloveLang = {
+        'seatsRemaining': 'You have ${n} available licenses left.',
+        'seatsFull': 'This invite fills up all your available licenses',
+        'seatsNeeded': 'This invitation will require ${n} extra licenses.',
+
+        'seatsTotal': 'You have ${n} licenses.',
+        'seatsUsed': 'You used ${n} licenses',
+        'seatsAvailable': 'You have ${n} licenses available.',
+        'seatsAdded': 'You will invite ${n} new members.',
+
+        'team.createNew': '+ Add team',
+        'team.writeNew': 'Write',
+    }
+
+    var roleTags = [{"id":4,"name":"Team Member","default":true},{"id":3,"name":"Team Manager","default":false},{"id":2,"name":"Workspace Admin","default":false}];
+    var teamTags = [{"id":5903,"name":"Default"}];
+    var defaultTeam = null;
+</script>
+                </div>
+            </div>
+            <div class="main-sidebar__backdrop"></div>
+     </div>
+<div class="footer-minimal">
+    <ul class="footer-minimal__nav">
+        <li><a href="/terms">Terms and conditions</a></li>
+        <li><a href="/privacy">Privacy policy</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="footer-minimal__copy">
+        © {{manifest['title']}} 2024 ® - Your PDF Editor    </div>
+</div>
+<script src="/static/dist/js/web.js" async="async"></script>
+<script src="/static/dist/js/admin.7909e88.js" async="async"></script>
+<script src="/static/js/ilove.min.js?a=1.3" async="async"></script>
+{%endblock%}

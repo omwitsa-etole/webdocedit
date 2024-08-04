@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Detection with Bounding Boxes</title>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2/dist/tesseract.min.js"></script>
+  <style>
+    #container {
+      position: relative;
+      display: inline-block;
+    }
+    .outputCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+	.text-input {
+      position: absolute;
+      border: 1px solid blue;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      padding: 2px;
+	  box-sizing: border-box;
+	  margin-top: 99px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text Detection with Bounding Boxes</h1>
+  <input type="file" id="imageUploader" accept="image/*">
+  <div id="container">
+    <img id="uploadedImage" style="max-width: 100%;">
+    <canvas id="outputCanvas"></canvas>
+  </div>
+<script>
+    document.getElementById('imageUploader').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById(img_id);
+          img.src = e.target.result;
+          img.onload = function() {
+            // Create canvas for drawing rectangles and text
+            const canvas = document.createElement("canvas");
+			canvas.setAttribute("id","canvas_"+img_id);
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match the image
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Clear previous drawings
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0);
+
+            Tesseract.recognize(
+              img.src,
+              'eng',
+              {
+                logger: m => console.log(m),
+                tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+              }
+            ).then(({ data: { text, words } }) => {
+              // Clear previous drawings (if needed)
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+              // Redraw the image
+              //ctx.drawImage(img, 0, 0);
+
+              if (words) {
+				const existingInputs = document.querySelectorAll('.text-input');
+                existingInputs.forEach(input => input.remove());
+                // Draw rectangles and text inside detected boxes
+                words.forEach(word => {
+                  const { bbox, text: wordText } = word;
+                  ctx.strokeStyle = 'blue';
+                  ctx.lineWidth = 2;
+                  ctx.strokeRect(bbox.x0, bbox.y0, bbox.x1 - bbox.x0, bbox.y1 - bbox.y0);
+
+                  const input = document.createElement('input');
+                  input.type = 'text';
+                  input.value = wordText;
+                  input.className = 'text-input';
+                  input.style.left = `${bbox.x0}px`;
+                  input.style.top = `${bbox.y0}px`;
+                  input.style.width = `${bbox.x1 - bbox.x0}px`;
+                  input.style.height = `${bbox.y1 - bbox.y0}px`;
+                  input.style.textAlign = 'center';
+                  input.style.fontSize = '12px';
+                  input.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                  input.style.border = 'none';
+                  input.style.outline = 'none';
+				  input.style.resize = 'none'; 
+				  //document.body.appendChild(input);
+                });
+				img.setAttribute("style","visibility: hidden;")
+				img.insertAdjacentElement('afterend', canvas);
+              } else {
+                console.warn('No bounding boxes found.');
+              }
+
+              // Optionally, display detected text in the console
+			  
+              console.log('Detected text:', text);
+            }).catch(err => {
+              console.error(err);
+            });
+          };
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
