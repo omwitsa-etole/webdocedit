@@ -19298,6 +19298,7 @@ async function renderImage(imageUrl, canvasId) {
 				  }
 				  
 				  const target = e.target.closest('.page');
+				  console.log("target",target,draggedElement)
 				  if (draggedElement !== target) {
 					// Swap positions in the DOM
 					const draggedElementParent = draggedElement.parentNode;
