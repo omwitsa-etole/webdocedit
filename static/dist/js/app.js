@@ -4,51 +4,49 @@ var apiFiles = apiServer+"/files/uploads/"
 async function renderImage(imageUrl, canvasId) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext('2d');
-
   const img = new Image();
 
-  fetch(imageUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.blob();
-    })
-    .then(blob => {
-      const url = URL.createObjectURL(blob);
+  try {
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
 
+    await new Promise((resolve, reject) => {
       img.onload = function() {
-        
-		const imgWidth = img.width;
-		const imgHeight = img.height;
+        const imgWidth = img.width;
+        const imgHeight = img.height;
 
-		// Calculate scale to fit the canvas
-		const scaleWidth = canvas.width / imgWidth;
-		const scaleHeight = canvas.height / imgHeight;
-		const scale = Math.min(scaleWidth, scaleHeight);
+        // Calculate scale to fit the canvas
+        const scaleWidth = canvas.width / imgWidth;
+        const scaleHeight = canvas.height / imgHeight;
+        const scale = Math.min(scaleWidth, scaleHeight);
 
-		// Set canvas dimensions to scaled image dimensions
-		const scaledWidth = imgWidth * scale;
-		const scaledHeight = imgHeight * scale;
+        // Set canvas dimensions to scaled image dimensions
+        const scaledWidth = imgWidth * scale;
+        const scaledHeight = imgHeight * scale;
 
-		// Clear canvas and set new dimensions
-		canvas.width = scaledWidth;
-		canvas.height = scaledHeight;
+        // Clear canvas and set new dimensions
+        canvas.width = scaledWidth;
+        canvas.height = scaledHeight;
 
-		// Draw the image on the canvas at scaled dimensions
-		ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
+        // Draw the image on the canvas at scaled dimensions
+        ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
 
-
-        
         URL.revokeObjectURL(url);
+        resolve();
       };
 
+      img.onerror = reject;
       img.src = url;
-    })
-    .catch(err => {
-      console.error('Error fetching or displaying image: ', err);
     });
+  } catch (err) {
+    console.error('Error fetching or displaying image: ', err);
+  }
 }
+
 
 !function(n) {
     var i = {};
