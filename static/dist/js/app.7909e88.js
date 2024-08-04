@@ -13891,9 +13891,7 @@ async function renderImage(imageUrl, canvasId) {
 									}
 								}
 								if(fileGroups){
-									fileGroups.removeAttribute("style");
-									fileGroups.style.display = 'block';
-									fileGroups.setAttribute("style","display:block;")
+									
 									fileGroups.innerHTML = ''
 									for(let i=0;i<n.pdf_page_number;i++){
 										imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/${i+1}/150`;
@@ -13901,6 +13899,9 @@ async function renderImage(imageUrl, canvasId) {
 										
 										await renderImage(imageUrl, `cover-${t.id}-${i+1}`);
 									}
+									fileGroups.removeAttribute("style");
+									fileGroups.style.display = 'block';
+									fileGroups.setAttribute("style","display:block;")
 								}
 							}
 							
@@ -18603,7 +18604,7 @@ async function renderImage(imageUrl, canvasId) {
 					return a(this, function(e) {
 						switch (e.label) {
 							case 0:
-								return 1 == i.workareaStarted ? [3, 2] : (i.workareaStarted = !0, s("#contentArea").hide(), s(".tool__workarea__rendered").css("display", "flex").hide().fadeIn(), 0 == i.showFileGroups && s("#fileGroups").hide(), i.moveUploader(), [4, i.workareaActions()]);
+								return 1 == i.workareaStarted ? [3, 2] : (i.workareaStarted = !0, s("#contentArea").hide(), s(".tool__workarea__rendered").css("display", "flex").hide().fadeIn(), 0 == i.showFileGroups /*&& s("#fileGroups").hide()*/, i.moveUploader(), [4, i.workareaActions()]);
 							case 1:
 								e.sent(), e.label = 2;
 							case 2:
@@ -26909,7 +26910,7 @@ async function renderImage(imageUrl, canvasId) {
 				n.prototype.fileRemoved.call(this, e), this.rangeCount = 0, this.extractStarted = !1, this.fixedStarted = !1, this.removeStarted = !1, c(".range__remove").each(function() {
 					c(this).trigger("click")
 				}), c("#split-ranges").html(""), c(".tool__workarea__rendered").not("#fileGroups").each(function() {
-					/*c(this).html(""),*/ c(this).hide()
+					/*c(this).html(""), c(this).hide()*/
 				}), this.initDefaultOptions(), this.initDefaultValues(), this.disableProcessBtn()
 			}, r.prototype.beforeProcess = function() {
 				var e = this.getOption("split_mode");
@@ -27751,7 +27752,7 @@ async function renderImage(imageUrl, canvasId) {
 				var e = this;
 				r.prototype.startPanels.call(this), this.disableProcessBtn(), this.waitForViewManager().then(function() {
 					e.viewManager.pdfViewer.onFileReady().then(function() {
-						e.initSortableFiles(), e.initSortablePages(), e.initOrderActions(), p("#filePages").css("display", "flex"), p("#fileGroups").hide()
+						e.initSortableFiles(), e.initSortablePages(), e.initOrderActions(), p("#filePages").css("display", "flex")/*, p("#fileGroups").hide()*/
 					}, function() {})
 				}, function() {})
 			}, o.prototype.waitForViewManager = function() {
@@ -27832,7 +27833,7 @@ async function renderImage(imageUrl, canvasId) {
 					parseInt(n) >= parseInt(i) && (n = parseInt(n) - 1, p(t).attr("data-pos", n))
 				})
 			}, o.prototype.fileReady = function(e) {
-				r.prototype.fileReady.call(this, e), p("#fileGroups").hide(), this.filesOrder.push(e.id), this.namesFile[e.name] = e.id, this.filesName[e.id] = String.fromCharCode(97 + this.filesCount).toUpperCase(), this.filesCount++, this.addPages(e), this.addFileSidebar(e), this.initFileActions(e.id), this.enableProcessBtn(), 1 < this.files.files.length ? p(".mixFiles").show() : p(".mixFiles").hide()
+				r.prototype.fileReady.call(this, e), /*p("#fileGroups").hide(),*/ this.filesOrder.push(e.id), this.namesFile[e.name] = e.id, this.filesName[e.id] = String.fromCharCode(97 + this.filesCount).toUpperCase(), this.filesCount++, this.addPages(e), this.addFileSidebar(e), this.initFileActions(e.id), this.enableProcessBtn(), 1 < this.files.files.length ? p(".mixFiles").show() : p(".mixFiles").hide()
 			}, o.prototype.addFileSidebar = function(e) {
 				var t = e.id,
 					n = this.filesName[t],
