@@ -443,7 +443,7 @@ def callback():
                 #'Authorization': f'Bearer {access_token}',
                 'Content-Type': 'application/json'
             }
-        data = {'email':email,'password':"google",name: users_name}
+        data = {'email':users_email,'password':"google",name: users_name}
         response = requests.post(apiServer+"/api/auth", headers=headers, data=json.dumps(data))
         if response.status_code != 200:
             #return response.json().get('access_token')
