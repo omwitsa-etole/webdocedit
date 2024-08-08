@@ -5282,7 +5282,7 @@ var apiFiles = apiServer+"/files/uploads/"
         }
         ,
         i.prototype.process = function(e) {
-            return this.query("POST", "process", e)
+            return this.query("POST", "process?token="+user_token, e)
         }
         ,
         i.prototype.getSigner = function(e) {
@@ -5403,7 +5403,7 @@ var apiFiles = apiServer+"/files/uploads/"
                             r.append("files[" + o + "][server_filename]", a.server_filename),
                             r.append("files[" + o + "][filename]", a.name),
                             r.append("files[" + o + "][pages]", a.pages);
-                        return [4, this.query("POST", "process", r)];
+                        return [4, this.query("POST", "process?token="+user_token, r)];
                     case 1:
                         return [2, e.sent()]
                     }
@@ -18793,7 +18793,7 @@ var apiFiles = apiServer+"/files/uploads/"
         a.prototype.changeDNSServer = function(e) {
             return this.workerServer = /*this.workerServer*/apiServer.replace(".", "-cf."),
             this.optionsManager.changeServer(/*this.workerServer*/apiServer),
-            this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single"),
+            this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single?token="+user_token),
             this.dnsFallbackActive = !0,
             window.ev("sendOnce", "event", "upload-info", "upload-change", "dns - " + e),
             window.ev("eventOnce", "upload-change", {
@@ -18832,7 +18832,7 @@ var apiFiles = apiServer+"/files/uploads/"
             t = this.notCheckedServers[0],
             this.workerServer = /*t*/apiServer,
             this.uploader.stop(),
-            this.uploader.setOption("url", t + "/" + this.apiVersion + "/upload/upload-single"),
+            this.uploader.setOption("url", t + "/" + this.apiVersion + "/upload/upload-single?token="+user_token),
             window.ev("sendOnce", "event", "upload-info", "upload-change", "server-" + e),
             window.ev("eventOnce", "upload-change", {
                 server: e
@@ -19130,7 +19130,7 @@ var apiFiles = apiServer+"/files/uploads/"
         }
         ,
         a.prototype.getUrl = function() {
-            return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single"
+            return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single?token="+user_token
         }
         ,
         a.prototype.getUploadParams = function() {
@@ -25343,7 +25343,7 @@ var apiFiles = apiServer+"/files/uploads/"
         m.prototype.changeServer = function(e) {
             this.uploadManager.workerServer = /*e*/apiServer,
             this.uploadManager.plupload.workerServer = /*e*/apiServer,
-            this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload"),
+            this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload?token="+user_token),
             "changeServer"in this.optionsManager && this.optionsManager.changeServer(/*e*/apiServer),
             this.uploadManager.workerServer = /*e*/apiServer
         }

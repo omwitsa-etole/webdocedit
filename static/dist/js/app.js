@@ -5329,7 +5329,7 @@ async function renderImage(imageUrl, canvasId) {
         }
         ,
         i.prototype.process = function(e) {
-            return this.query("POST", "process", e)
+            return this.query("POST", "process?token="+user_token, e)
         }
         ,
         i.prototype.getSigner = function(e) {
@@ -5450,7 +5450,7 @@ async function renderImage(imageUrl, canvasId) {
                             o.append("files[" + r + "][server_filename]", a.server_filename),
                             o.append("files[" + r + "][filename]", a.name),
                             o.append("files[" + r + "][pages]", a.pages);
-                        return [4, this.query("POST", "process", o)];
+                        return [4, this.query("POST", "process?token="+user_token, o)];
                     case 1:
                         return [2, e.sent()]
                     }
@@ -18840,7 +18840,7 @@ async function renderImage(imageUrl, canvasId) {
         a.prototype.changeDNSServer = function(e) {
             return this.workerServer = /*this.workerServer*/apiServer.replace(".", "-cf."),
             this.optionsManager.changeServer(/*this.workerServer*/apiServer),
-            this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single"),
+            this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single?token="+user_token),
             this.dnsFallbackActive = !0,
             window.ev("sendOnce", "event", "upload-info", "upload-change", "dns - " + e),
             window.ev("eventOnce", "upload-change", {
@@ -18879,7 +18879,7 @@ async function renderImage(imageUrl, canvasId) {
             t = this.notCheckedServers[0],
             this.workerServer = /*t*/apiServer,
             this.uploader.stop(),
-            this.uploader.setOption("url", /*t*/apiServer + "/" + this.apiVersion + "/upload/upload-single"),
+            this.uploader.setOption("url", /*t*/apiServer + "/" + this.apiVersion + "/upload/upload-single?token="+user_token),
             window.ev("sendOnce", "event", "upload-info", "upload-change", "server-" + e),
             window.ev("eventOnce", "upload-change", {
                 server: e
@@ -19176,7 +19176,7 @@ async function renderImage(imageUrl, canvasId) {
         }
         ,
         a.prototype.getUrl = function() {
-            return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single"
+            return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload/upload-single?token="+user_token
         }
         ,
         a.prototype.getUploadParams = function() {
@@ -19240,7 +19240,8 @@ async function renderImage(imageUrl, canvasId) {
 					console.log(numPages,i)
 					const filePages = document.getElementById('filePages');
 					filePages.innerHTML += `
-							<div class="page fileA" id="A${i+1}" data-page="${i+1}" data-pos="${i+1}" data-file="A">
+							<div id="A${i+1}">
+							<div class="page fileA"  data-page="${i+1}" data-pos="${i+1}" data-file="A">
 								<div class="page__add tooltip tooltip--top" data-title="Add a blank page"></div>
 								<div class="page__actions">
 									<a class="page__btn rotate tooltip--top tooltip" data-rotate="0" title="Rotate">
@@ -19264,6 +19265,7 @@ async function renderImage(imageUrl, canvasId) {
 								</div>
 							</div>
 							<div class="page__add tooltip tooltip--top" data-title="Add a blank page"></div>
+							</div>
 							</div>
 					`
 					imageUrl = `${apiServer}/v1/pdfrender/${t.pdf_page_number}/${t.server_filename.replace(".pdf","")}/${i+1}/150`;
@@ -24572,7 +24574,7 @@ async function renderImage(imageUrl, canvasId) {
         g.prototype.changeServer = function(e) {
             this.uploadManager.workerServer = /*e*/apiServer,
             this.uploadManager.plupload.workerServer = /*e*/apiServer,
-            this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload/upload-single"),
+            this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload/upload-single?token="+user_token),
             "changeServer"in this.optionsManager && this.optionsManager.changeServer(e),
             this.uploadManager.workerServer = /*e*/apiServer
         }

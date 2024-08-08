@@ -79,6 +79,12 @@ crossorigin="anonymous"></script>
     }, 5);
 })();
 </script><link href="/static/dist/css/web.7909e88.css" rel="stylesheet">
+<script>
+	let user_token = "{{manifest['user'].get('token')}}";
+	if(user_token.includes("None") || user_token == null){
+		user_token = null;
+	}
+</script>
 <style>
 #ad {
     position: absolute;

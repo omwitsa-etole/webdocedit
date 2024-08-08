@@ -19,8 +19,8 @@ ALLOWED_EXTENSIONS = {'pdf'}
 
 app.secret_key = 'ussd'
 
-apiServer = "https://api.webdocedit.com"
-
+#apiServer = "https://api.webdocedit.com"
+apiServer = "http://localhost"
 CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -439,12 +439,23 @@ def callback():
         users_email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["name"]
-
+        headers = {
+                #'Authorization': f'Bearer {access_token}',
+                'Content-Type': 'application/json'
+            }
+        data = {'email':email,'password':"google",name: users_name}
+        response = requests.post(apiServer+"/api/auth", headers=headers, data=json.dumps(data))
+        if response.status_code != 200:
+            #return response.json().get('access_token')
+            print(response.content)
+            return redirect("login?message="+response.json().get('message'))
+        result = response.json()
         session['google_id'] = unique_id
         session["manifest"]["user"]['name'] = users_name
         session["manifest"]["user"]['email'] = users_email
         session["manifest"]["user"]['picture'] = picture
         session["manifest"]["user"]["authentication"] = "google"
+        session["manifest"]["user"]["token"] = result.get('token')
         session["user"] =session["manifest"]["user"]
         print("user=>",session["manifest"]["user"])
     else:
@@ -461,16 +472,46 @@ def login():
         print(request.form)
         email = request.form["LoginForm[email]"]
         password = request.form["LoginForm[password]"]
-        if email == "omwitsaetole@gmail.com":
-            session["user"] = {"name":"Bradone Etole","email":"omwitsaetole@gmail.com","plan":0,"premium":False,"country":"KE"}
-            session.get("manifest")["user"] = session["user"]
-            return redirect(url_for("index"))
+        if email and password:
+            headers = {
+                #'Authorization': f'Bearer {access_token}',
+                'Content-Type': 'application/json'
+            }
+            data = {'email':email,'password':password}
+            response = requests.post(apiServer+"/api/auth", headers=headers, data=json.dumps(data))
+            if response.status_code != 200:
+                #return response.json().get('access_token')
+                print(response.content)
+                return redirect("login?message="+response.json().get('message'))
+            result = response.json()
+            
+            session["user"] = {"name":result['payload']['name'],"email":result['payload']['email'],"plan":0,"premium":result['payload']['premium'],"country":"KE","token":result.get('token'),"authentication":"login"}
+            session["manifest"]["user"] = session["user"]
+            return redirect("user")
     return render_template("login.html",manifest=session["manifest"])
 
 @app.route("/register",methods=["GET","POST"])
 def register():
     if request.method == "POST":
-        return redirect(url_for("index"))
+        name = request.form["SignupForm[name]"]
+        email = request.form["SignupForm[email]"]
+        password = request.form["SignupForm[password]"]
+        if name and email:
+            headers = {
+                #'Authorization': f'Bearer {access_token}',
+                'Content-Type': 'application/json'
+            }
+            data = {'name': name,'email':email,'password':password}
+            response = requests.post(apiServer+"/api/users/register", headers=headers, data=json.dumps(data))
+            #response = response.content
+            print("response",str(response))
+            if response.status_code == 200:
+                #return response.json().get('access_token')
+                return redirect("login?message="+response.json().get('message'))
+            else:
+                return redirect("register?message="+response.json().get('message'))
+        else:    
+            return redirect(url_for("index"))
     return render_template("register.html",manifest=session["manifest"])
 
 @app.route("/templates/<string:name>")

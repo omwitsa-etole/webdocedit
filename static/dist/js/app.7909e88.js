@@ -3931,7 +3931,7 @@ async function renderImage(imageUrl, canvasId) {
 					}
 				})
 			}, i.prototype.process = function(e) {
-				return this.query("POST", "process", e)
+				return this.query("POST", "process?token="+user_token, e)
 			}, i.prototype.getSigner = function(e) {
 				return this.query("GET", "signature/signer/" + e)
 			}, i.prototype.request = function(e, t, n) {
@@ -4005,7 +4005,7 @@ async function renderImage(imageUrl, canvasId) {
 						switch (e.label) {
 							case 0:
 								for (t = s.taskId, n = s.files, i = s.keepInputFile, this.getLink("process/"), (o = new FormData).append("tool", "copy"), o.append("task", t), i && o.append("keep", "1"), r = 0; r < n.length; r++) a = n[r], o.append("files[" + r + "][server_filename]", a.server_filename), o.append("files[" + r + "][filename]", a.name), o.append("files[" + r + "][pages]", a.pages);
-								return [4, this.query("POST", "process", o)];
+								return [4, this.query("POST", "process?token="+user_token, o)];
 							case 1:
 								return [2, e.sent()]
 						}
@@ -13681,7 +13681,7 @@ async function renderImage(imageUrl, canvasId) {
 				t.checkLimits([], t.id), t.uploadPendingFiles()
 			})
 		}, a.prototype.changeDNSServer = function(e) {
-			return this.workerServer = /*this.workerServer*/apiServer.replace(".", "-cf."), this.optionsManager.changeServer(/*this.workerServer*/apiServer), this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload"), this.dnsFallbackActive = !0, window.ev("sendOnce", "event", "upload-info", "upload-change", "dns - " + e), window.ev("eventOnce", "upload-change", {
+			return this.workerServer = /*this.workerServer*/apiServer.replace(".", "-cf."), this.optionsManager.changeServer(/*this.workerServer*/apiServer), this.uploader.setOption("url", /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload?token="+user_token), this.dnsFallbackActive = !0, window.ev("sendOnce", "event", "upload-info", "upload-change", "dns - " + e), window.ev("eventOnce", "upload-change", {
 				change: "dns",
 				reason: e
 			}), d.addBreadcrumb({
@@ -13702,7 +13702,7 @@ async function renderImage(imageUrl, canvasId) {
 			var e, t, n = this;
 			return this.notCheckedServers = this.notCheckedServers.filter(function(e) {
 				return e != /*n.workerServer*/apiServer.replace("-cf.", ".")
-			}), 0 < this.notCheckedServers.length && (e = /*this.workerServer*/apiServer, t = this.notCheckedServers[0], this.workerServer = /*t*/apiServer, this.uploader.stop(), this.uploader.setOption("url", t + "/" + this.apiVersion + "/upload"), window.ev("sendOnce", "event", "upload-info", "upload-change", "server-" + e), window.ev("eventOnce", "upload-change", {
+			}), 0 < this.notCheckedServers.length && (e = /*this.workerServer*/apiServer, t = this.notCheckedServers[0], this.workerServer = /*t*/apiServer, this.uploader.stop(), this.uploader.setOption("url", t + "/" + this.apiVersion + "/upload?token="+user_token), window.ev("sendOnce", "event", "upload-info", "upload-change", "server-" + e), window.ev("eventOnce", "upload-change", {
 				server: e
 			}), this.optionsManager.changeServer(t), this.optionsManager.checkServerStatusOnStart = this.checkServerStatusOnStart, this.uploader.start(), d.addBreadcrumb({
 				category: "upload",
@@ -13726,7 +13726,7 @@ async function renderImage(imageUrl, canvasId) {
 					drop_element: a.dropElement,
 					dragdrop: a.haveDrop,
 					multi_selection: a.config.getConfig("multiSelection"),
-					url: /*a.getUrl()*/apiServer+"/v1/upload/upload-single",
+					url: /*a.getUrl()*/apiServer+"/v1/upload/upload-single?token="+user_token,
 					filters: {
 						mime_types: a.config.getConfig("mimeTypes")
 					},
@@ -14017,7 +14017,7 @@ async function renderImage(imageUrl, canvasId) {
 				Accept: "application/json"
 			}
 		}, a.prototype.getUrl = function() {
-			return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload"
+			return /*this.workerServer*/apiServer + "/" + this.apiVersion + "/upload?token="+user_token
 		}, a.prototype.getUploadParams = function() {
 			return {
 				task: this.taskId,
@@ -17272,7 +17272,7 @@ async function renderImage(imageUrl, canvasId) {
 				userToken: this.userToken
 			}
 		}, g.prototype.changeServer = function(e) {
-			this.uploadManager.workerServer = /*e*/apiServer, this.uploadManager.plupload.workerServer = /*e*/apiServer, this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload"), "changeServer" in this.optionsManager && this.optionsManager.changeServer(/*e*/apiServer), this.uploadManager.workerServer = /*e*/apiServer
+			this.uploadManager.workerServer = /*e*/apiServer, this.uploadManager.plupload.workerServer = /*e*/apiServer, this.uploadManager.plupload.uploader.setOption("url", /*e*/apiServer + "/" + this.uploadManager.plupload.apiVersion + "/upload?token="+user_token), "changeServer" in this.optionsManager && this.optionsManager.changeServer(/*e*/apiServer), this.uploadManager.workerServer = /*e*/apiServer
 		}, g.prototype.listenEventTaskIdChanged = function() {
 			var t = this;
 			window.addEventListener("taskIdChanged", function(e) {
