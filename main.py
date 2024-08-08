@@ -224,6 +224,7 @@ def paypal_pay():
 def terms():
     return render_template('terms.html',manifest=session["manifest"])
 
+@app.route('/help/privacy')
 @app.route('/privacy-policy')
 @app.route('/privacy')
 def privacy():
