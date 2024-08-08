@@ -448,7 +448,7 @@ def callback():
         if response.status_code != 200:
             #return response.json().get('access_token')
             print(response.content)
-            return redirect("login?message="+response.json().get('message'))
+            return redirect("login?message="+str(response.content))
         result = response.json()
         session['google_id'] = unique_id
         session["manifest"]["user"]['name'] = users_name
