@@ -19016,6 +19016,7 @@ async function renderImage(imageUrl, canvasId) {
 						$('.ad').hide();
 						$('.to_left').removeClass('to_left');
                         n = JSON.parse(n.response);
+						var imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/1/150`;
 						$("#editor_file_select").append(`<option value="${t.id}" selected="selected">${n.file ?? n.filename}</option>`)
 						const filePages = document.getElementById("filePages");
 						const fileGroups = document.getElementById("fileGroups");
