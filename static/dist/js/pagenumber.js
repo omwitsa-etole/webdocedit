@@ -25281,7 +25281,7 @@ async function renderImage(imageUrl, canvasId) {
             "tool" == this.action && null != this.tool && (e = this.tool == this.subtool ? this.tool.replace("image", "") : this.tool.replace("image", this.subtool),
             this.alias = e,
             (window.Cookies && 0 != window.cmp_ck || 0 == window.isgdpr) && ("pdfocr" == this.subtool && (e = "pdfocr"),
-            window.Cookies.set("lastTool", e)),
+            /*window.Cookies.set("lastTool", e)),*/
             this.variableUserLevel(),
             this.initTool(),
             p.Network.checkNetwork()),
