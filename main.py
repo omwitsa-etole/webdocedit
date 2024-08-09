@@ -219,6 +219,7 @@ def paypal_pay():
             return jsonify({'error': 'Failed to create subscription', 'details': response.json()}), response.status_code
     except Exception as e:
         return jsonify({'error': str(e)}), 500       
+@app.route('/help/terms')
 @app.route('/terms-of-use') 
 @app.route('/terms')
 def terms():
