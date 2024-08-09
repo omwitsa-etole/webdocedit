@@ -19011,7 +19011,7 @@ async function renderImage(imageUrl, canvasId) {
                             message: "Slow Connection: Set to change server"
                         }))
                     },
-                    FileUploaded: function(e, t, n) {
+                    FileUploaded: async function(e, t, n) {
                         o.file = null;
 						$('.ad').hide();
 						$('.to_left').removeClass('to_left');
@@ -19548,7 +19548,7 @@ async function renderImage(imageUrl, canvasId) {
                         }
                         ,
                         o.onerror = function(e) {
-                            m(l).css("background-image", 'url("/img/filetype/damaged.svg")').css("background-size", "35%;"),
+                            m(l).css("background-image", 'url("/static/img/filetype/damaged.svg")').css("background-size", "35%;"),
                             s(e)
                         }
                         ,
@@ -19646,7 +19646,7 @@ async function renderImage(imageUrl, canvasId) {
                                     }
                                     ,
                                     i.onerror = function(e) {
-                                        m(s).attr("style", 'background-image: url("/img/filetype/damaged.svg");background-size:35%;'),
+                                        m(s).attr("style", 'background-image: url("/static/img/filetype/damaged.svg");background-size:35%;'),
                                         a(e)
                                     }
                                     ,
@@ -19678,7 +19678,7 @@ async function renderImage(imageUrl, canvasId) {
                             }
                             ,
                             r.onerror = function(e) {
-                                m(s).css("background-image", 'url("/img/filetype/damaged.svg")').css("background-size", "35%;"),
+                                m(s).css("background-image", 'url("/static/img/filetype/damaged.svg")').css("background-size", "35%;"),
                                 a(e)
                             }
                             ,
@@ -19743,7 +19743,7 @@ async function renderImage(imageUrl, canvasId) {
                     }
                     ,
                     n.onerror = function(e) {
-                        m(r).attr("style", 'background-image: url("/img/filetype/damaged.svg");background-size:35%;'),
+                        m(r).attr("style", 'background-image: url("/static/img/filetype/damaged.svg");background-size:35%;'),
                         t(e)
                     }
                     ,
