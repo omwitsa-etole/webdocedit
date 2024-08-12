@@ -28,6 +28,15 @@ def allowed_file(filename):
     return '.' in filename and \
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
             
+
+@app.route('/api/trending', methods=['GET'])
+def get_trending_keywords():
+    pytrends = TrendReq(hl='en-US', tz=360)
+
+    trending_searches = pytrends.trending_searches(pn='india')  
+    trending_keywords = trending_searches[0].tolist()
+    return jsonify(trending_keywords)
+    
 @app.route('/robots.txt')
 def robots_txt():
     content = "User-agent: *\nAllow:*\nDisallow:"
