@@ -33,8 +33,10 @@ def allowed_file(filename):
 @app.route('/api/trending', methods=['GET'])
 def get_trending_keywords():
     pytrends = TrendReq(hl='en-US', tz=360)
-
-    trending_searches = pytrends.trending_searches(pn='india')  
+    location = request.args.get("location")
+    if location == None or len(location) == 0:
+        location = "india"
+    trending_searches = pytrends.trending_searches(pn=location)  
     trending_keywords = trending_searches[0].tolist()
     return jsonify(trending_keywords)
     
