@@ -577,6 +577,7 @@ def function(title):
         return redirect(url_for('logout'))
     found = None
     if title:
+        title = title.replace("-","_")
         for tool in session["manifest"]["tools"]:
             for key in tool.keys():
                 if key == title:
