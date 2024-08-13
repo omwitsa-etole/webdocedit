@@ -1,6 +1,50 @@
 var apiServer = 'https://api.webdocedit.com';
 var apiFiles = apiServer+"/files/uploads/"
+async function renderImage(imageUrl, canvasId) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
 
+  try {
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    await new Promise((resolve, reject) => {
+      img.onload = function() {
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+
+        // Calculate scale to fit the canvas
+        const scaleWidth = canvas.width / imgWidth;
+        const scaleHeight = canvas.height / imgHeight;
+        const scale = Math.min(scaleWidth, scaleHeight);
+
+        // Set canvas dimensions to scaled image dimensions
+        const scaledWidth = imgWidth * scale;
+        const scaledHeight = imgHeight * scale;
+
+        // Clear canvas and set new dimensions
+        canvas.width = scaledWidth;
+        canvas.height = scaledHeight;
+
+        // Draw the image on the canvas at scaled dimensions
+        ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
+
+        URL.revokeObjectURL(url);
+        resolve();
+      };
+
+      img.onerror = reject;
+      img.src = url;
+    });
+  } catch (err) {
+    console.error('Error fetching or displaying image: ', err);
+  }
+}
 !function(n) {
     var i = {};
     function r(e) {
@@ -18970,7 +19014,43 @@ var apiFiles = apiServer+"/files/uploads/"
                     FileUploaded: function(e, t, n) {
                         o.file = null;
 						$('.ad').hide();
+						$('.to_left').removeClass('to_left');
                         n = JSON.parse(n.response);
+						var imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/1/150`;
+						$("#editor_file_select").append(`<option value="${t.id}" selected="selected">${n.file ?? n.filename}</option>`)
+						const filePages = document.getElementById("filePages");
+						const fileGroups = document.getElementById("fileGroups");
+						console.log("files",filePages)
+						if(filePages){
+							filePages.style.display = 'block';
+							for(let i=0;i<n.pdf_page_number;i++){
+								imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/${i+1}/150`;
+								filePages.innerHTML += `<div class="page file${t.id}" id="${t.id}${i+1}" data-page="${i+1}" data-file="${t.id}" style=""><div class="page__container"><div class="page__element"><div class="page__canvas"><canvas id="page-${t.id}-${i+1}" width="108" height="140" data-file="${t.id}" data-page="${i+1}" data-width="612" data-height="792" style="background-image: none;"></canvas><div class="file__bullet file__bullet--top file__bullet--left" title="Watermark will be placed on top left"></div></div></div></div></div>`
+								await renderImage(imageUrl, `page-${t.id}-${i+1}`);
+							}
+							setTimeout(()=>{
+								$(".numPages").html(`${n.pdf_page_number}`)
+							},1000)
+						}
+						if(fileGroups){
+							
+							fileGroups.innerHTML = ''
+							for(let i=0;i<n.pdf_page_number;i++){
+								imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/${i+1}/150`;
+								fileGroups.innerHTML += `<div class="file file--split tooltip--top" id="${t.id}" rel="user" data-size="171941" data-extension="PDF" title="image size..."><div class="file__actions"><a class="file__btn rotate tooltip--top tooltip" data-rotate="0" title="Rotate"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 14 16"><path d="M11.328 6.364l1.24-1.2c.79.98 1.283 2.113 1.433 3.288h-1.775c-.123-.735-.43-1.454-.896-2.088zm.896 3.778H14c-.15 1.175-.633 2.308-1.424 3.288l-1.24-1.2c.457-.634.765-1.344.888-2.088zm-.888 4.497C10.318 15.4 9.13 15.856 7.9 16v-1.716a5.31 5.31 0 0 0 2.162-.871l1.266 1.226zM6.152 2.595V0l4 3.846-4 3.76V4.302c-2.496.406-4.394 2.485-4.394 4.995s1.898 4.59 4.394 4.995V16C2.68 15.586 0 12.746 0 9.297s2.68-6.29 6.152-6.703z" fill="#47474F" fill-rule="evenodd"></path></svg></a><a class="file__btn remove tooltip--top tooltip" title="Remove this file"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon fill="#47474F" fill-rule="evenodd" points="12 1.208 10.79 0 6 4.792 1.21 0 0 1.208 4.79 6 0 10.792 1.21 12 6 7.208 10.79 12 12 10.792 7.21 6"></polygon></svg></a></div><div class="file__canvas"><canvas id="cover-${t.id}-${i+1}" width="99" height="140" class="pdf pdf "></canvas></div><div class="file__info"><span class="file__info__name">${n.file}</span></div></div>`
+								
+								await renderImage(imageUrl, `cover-${t.id}-${i+1}`);
+							}
+							fileGroups.removeAttribute("style");
+							fileGroups.style.display = 'block';
+							fileGroups.setAttribute("style","display:block;")
+							setTimeout(()=>{
+								fileGroups.removeAttribute("style");
+								fileGroups.style.display = 'block';
+								fileGroups.setAttribute("style","display:block;")
+								$(".numPages").html(`${n.pdf_page_number}`)
+							},1000)
+						}
                         a.fileUploaded(t.id, n)
                     },
                     UploadComplete: function(e, t) {
