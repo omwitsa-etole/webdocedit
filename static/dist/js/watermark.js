@@ -19011,7 +19011,7 @@ async function renderImage(imageUrl, canvasId) {
                             message: "Slow Connection: Set to change server"
                         }))
                     },
-                    FileUploaded: function(e, t, n) {
+                    FileUploaded: async function(e, t, n) {
                         o.file = null;
 						$('.ad').hide();
 						$('.to_left').removeClass('to_left');
