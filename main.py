@@ -129,7 +129,7 @@ async def before_request_func():
                 #{"remove_watermark":{"title":"Remove Watermark from a PDF","svg":"","description":"Remove image over your PDF in seconds. Choose the typography, transparency and position.","new":True,"category":"EDIT PDF"}},
                 
                 {"compare_pdf":{"title":"Compare PDF","svg":"","description":"Easily display the differences between two similar files.","new":True,"category":"PDF SECURITY"}},
-                {"redact_pdf":{"title":"Redact PDF","svg":"","description":"Remove sensitive content from PDFs","new":True,"category":"PDF SECURITY"}},
+                #{"redact_pdf":{"title":"Redact PDF","svg":"","description":"Remove sensitive content from PDFs","new":True,"category":"PDF SECURITY"}},
                 {"sign_pdf":{"title":"Sign PDF","svg":"","description":"Your tool to eSign documents. Sign a document yourself or send a signature request to others.","new":True,"category":"PDF SECURITY"}},
                 {"protect_pdf":{"title":"Encrypt PDF","svg":"","description":"Encrypt your PDF with a password to keep sensitive data confidential.","new":True,"category":"PDF SECURITY"}},
                 {"unlock_pdf":{"title":"Decrypt PDF","svg":"","description":"Remove PDF password security, giving you the freedom to use your PDFs as you want.","new":True,"category":"PDF SECURITY"}},
