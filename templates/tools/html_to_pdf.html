@@ -18,10 +18,14 @@
 <div class="to_left">
         <div id="dropArea"></div>
         <div class="tool__header">
-            <h1 class="tool__header__title">HTML to PDF</h1>
-            <h2 class="tool__header__subtitle">Convert web pages to PDF documents with high accuracy</h2>
+            <h1 class="tool__header__title">{{tool["title"]}}</h1>
+            <h2 class="tool__header__subtitle">{{tool["description"]}}</h2>
         </div>
         <div id="uploader" class="uploader">
+			<a class="uploader__btn tooltip--left active" id="pickfiles" href="javascript:;" title="Add more files" data-title="Add more files" style="position: relative; z-index: 1;">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="none" stroke-linejoin="round"><desc>Upload your file and transform it.</desc><path d="M10 1.833v16.333"></path><path d="M1.833 10h16.333"></path></svg>
+				<span>Select HTML file</span>
+			</a><br>
             <button data-toggle="modal" data-target="#htmlModal" data-whatever="@mdo" class="btn uploader__btn active">
                 <span>Add HTML</span>
             </button>
