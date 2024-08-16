@@ -68,7 +68,7 @@ function toText(file,img_id){
 			  input.style.width = `${bbox.x1 - bbox.x0}px`;
 			  input.style.height = `${bbox.y1 - bbox.y0}px`;
 			  input.style.textAlign = 'center';
-			  input.style.fontSize = '12px';
+			  //input.style.fontSize = '12px';
 			  input.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
 			  input.style.border = 'none';
 			  input.style.outline = 'none';
