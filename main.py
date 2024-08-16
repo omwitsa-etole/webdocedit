@@ -48,7 +48,9 @@ def robots_txt():
 @app.route('/ads.txt')
 def ads_txt():
     content = "google.com, pub-8402082494280043, DIRECT, f08c47fec0942fa0"
-    return Response(content, mimetype='text/plain')
+    #return Response(content, mimetype='text/plain')
+    filepath = os.path.join(os.getcwd(), 'static', 'ads.txt')
+    return send_file(filepath, mimetype='text/plain')
     
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
