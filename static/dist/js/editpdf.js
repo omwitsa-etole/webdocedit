@@ -31,7 +31,7 @@ function toText(file,img_id){
 		canvas.height = img.height;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(img, 0, 0);
-
+		ctx.fillStyle = 'white';
 		Tesseract.recognize(
 			img.src,
 			'eng',
@@ -76,14 +76,16 @@ function toText(file,img_id){
 			  editor_content.appendChild(input);
 			});
 			img.setAttribute("style","visibility: hidden;")
-			hideSpinner();
+			
 			console.log("jobs=>",textJobs)
 		  } else {
 			console.warn('No bounding boxes found.');
 		  }
 
 		  // Optionally, display detected text in the console
-		  console.log('Detected text:', text);
+		  //console.log('Detected text:', text);
+		  hideSpinner();
+		  $('#processTask').removeAttr('disabled');
 		}).catch(err => {
 		  console.error(err);
 		});
