@@ -163,8 +163,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <header class="header">
 	<nav class="navbar navbar-expand-lg navbar-dark" style="color:black;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
         
+        <a class="navbar-brand" href="/" title="{{manifest['title']}}" style="height: 100%;object-fit:cover;zoom: 250%;">
+            <img src="/static/img/{{manifest['title']|lower}}.svg" alt="{{manifest['title']}}"/>
+        </a>
         <div class="menu">
 			<span class="menu--sm"><i class="ico ico--tools"></i></span>
 			<span class="menu--md">All tools <i class="ico ico--down"></i></span>
