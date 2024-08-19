@@ -13763,6 +13763,7 @@ async function renderImage(imageUrl, canvasId) {
 						},
 						FilesRemoved: function(e, t) {},
 						BeforeUpload: function(e, t) {
+							$('.frame').hide();
 							if (!t) return e.stop(), !1;
 							r.file = t, r.offset = 0, r.chunk = 0, d.addBreadcrumb({
 								category: "upload",
