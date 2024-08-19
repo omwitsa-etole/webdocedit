@@ -13808,8 +13808,7 @@ async function renderImage(imageUrl, canvasId) {
                             
 							if(window.location.href.includes('merge') ){
 								await renderImage(imageUrl, 'cover-'+t.id);
-							}
-							if(window.location.href.includes("split")){
+							}else if(window.location.href.includes("split")){
 								let removed = null;
 								$(".numPages").html(`${n.pdf_page_number} Pages`);
 								for(let i=0;i<n.pdf_page_number;i++){
