@@ -128,6 +128,7 @@ input:not(:placeholder-shown) ~ .reset {
 .col-sm-6{
 	margin-top: 6px;
 	margin-left: 6px;
+	max-width: 48%;
 }
     </style>
     <div class="pattern-bg"></div>
@@ -151,7 +152,7 @@ input:not(:placeholder-shown) ~ .reset {
   </div>
 </div>
 <div class="tools">
-	<div class="tools__container row" id="tool_container">
+	<div class="row" id="tool_container">
 		{%for tool in manifest['tools']%}
         {%set key=tool.keys() | first %}
 		{%set ico =key.replace('_to_','').split('_')%}
@@ -164,7 +165,7 @@ input:not(:placeholder-shown) ~ .reset {
 			  <div class="card-body">
 				<h5 class="card-title" style="color:black;">{{tool[key]['title']}}</h5>
 				<p class="card-text" style="color:black;">{{tool[key]['description']}}</p>
-				<a href="{{key}}" class="btn btn-primary">{{key}}</a>
+				<a href="{{key}}" class="btn btn-primary" style="width: 85%;">{{key}}</a>
 			  </div>
 			</div>
 			</a>
