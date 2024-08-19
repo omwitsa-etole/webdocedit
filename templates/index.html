@@ -154,7 +154,7 @@ input:not(:placeholder-shown) ~ .reset {
   </div>
 </div>
 <div class="tools">
-	<div class="row" id="tool_container">
+	<div class="row" id="tool_container" style="width: 100%;">
 		{%for tool in manifest['tools']%}
         {%set key=tool.keys() | first %}
 		{%set ico =key.replace('_to_','').split('_')%}
