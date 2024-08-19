@@ -157,13 +157,13 @@ input:not(:placeholder-shown) ~ .reset {
 		{%set ico =key.replace('_to_','').split('_')%}
 		  <div class="col-sm-6">
 		    <a href="{{key}}"  title="{{tool[key]['title']}}"  style="text-decoration: none;">
-			<div class="card">
+			<div class="card" style="color:black;">
 			  <div class="icon">
 				<i class="ico ico--{{ico[0]}}"></i>
 			  </div>
 			  <div class="card-body">
-				<h5 class="card-title">{{tool[key]['title']}}</h5>
-				<p class="card-text">{{tool[key]['description']}}</p>
+				<h5 class="card-title" style="color:black;">{{tool[key]['title']}}</h5>
+				<p class="card-text" style="color:black;">{{tool[key]['description']}}</p>
 				<a href="{{key}}" class="btn btn-primary">{{key}}</a>
 			  </div>
 			</div>
