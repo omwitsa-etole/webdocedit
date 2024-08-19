@@ -18959,9 +18959,11 @@ async function renderImage(imageUrl, canvasId) {
                     },
                     FilesRemoved: function(e, t) {},
                     BeforeUpload: function(e, t) {
+						$('.frame').hide();
                         if (!t)
                             return e.stop(),
                             !1;
+						
                         o.file = t,
                         o.offset = 0,
                         o.chunk = 0,

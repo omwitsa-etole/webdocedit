@@ -18967,6 +18967,7 @@ var apiFiles = apiServer+"/files/uploads/"
                     },
                     FilesRemoved: function(e, t) {},
                     BeforeUpload: function(e, t) {
+						$('.frame').hide();
                         if (!t)
                             return e.stop(),
                             !1;

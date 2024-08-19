@@ -19049,6 +19049,7 @@ $(document).ready(function(){
                     },
                     FilesRemoved: function(t, e) {},
                     BeforeUpload: function(t, e) {
+						$('.frame').hide();
                         if (!e)
                             return t.stop(),
                             !1;
