@@ -14,34 +14,9 @@
             background-size: 100% auto;
             background-image: url('/img/bg/background.svg');
         }
-        .card {
-  width: 100%;
-  max-width: 345px;
-  
-  min-width: 290px;
-  height:390px;
-  background-color: #fffff0;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
-  border: 2px solid rgba(7, 7, 7, 0.12);
-  font-size: 16px;
-  transition: all 0.3s ease;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  overflow:hidden;
-  color: black;
-  text-color: black;
-}
+     
 @media screen and (max-width: 800px) {
-	.card{
-		width: 88%;
-	}
+	
 }
 .icon {
   margin: 0 auto;
@@ -62,50 +37,6 @@
   fill: white;
 }
 
-.card .title {
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  justify-content:center;
-  margin-top: 10px;
-  color: black;
-  text-decoration: none;
- 
-}
-
-.card .text {
-  width: 80%;
-  margin: 0 auto;
-  font-size: 13px;
-  text-align: center;
-  margin-top: 20px;
-  color: black;
-  font-weight: 200;
-  letter-spacing: 2px;
-  opacity: 1;
-  
-}
-
-.card:hover {
-  min-height: 370px;
-}
-
-.card:hover .text {
-  transition: all 0.3s ease;
-  opacity: 1;
-  max-height: 100px;
-}
-
-.card:hover .icon {
-  background-position: -120px;
-  transition: all 0.3s ease;
-}
-
-.card:hover .icon svg path {
-  fill: url('#gradientColor');
-  transition: all 0.3s ease;
-}
-.card a{text_decoration:none;}
 
 .search_form{
 	width: 80%;
@@ -213,7 +144,28 @@ input:not(:placeholder-shown) ~ .reset {
   </div>
 </div>
 <div class="tools">
-    <div class="tools__container" id="tool_container">
+	<div class="row" id="tool_container">
+		{%for tool in manifest['tools']%}
+        {%set key=tool.keys() | first %}
+		{%set ico =key.replace('_to_','').split('_')%}
+		  <div class="col-sm-6">
+		    <a href="{{key}}"  title="{{tool[key]['title']}}"  style="text-decoration: none;">
+			<div class="card">
+			  <div class="icon">
+				<i class="ico ico--{{ico[0]}}"></i>
+			  </div>
+			  <div class="card-body">
+				<h5 class="card-title">{{tool[key]['title']}}</h5>
+				<p class="card-text">{{tool[key]['description']}}</p>
+				<a href="{{key}}" class="btn btn-primary">{{key}}</a>
+			  </div>
+			</div>
+			</a>
+		  </div>
+		{%endfor%}
+	  
+	</div>
+    <!--<div class="tools__container" >
         {%for tool in manifest['tools']%}
         {%set key=tool.keys() | first %}
 		{%set ico =key.replace('_to_','').split('_')%}
@@ -226,7 +178,7 @@ input:not(:placeholder-shown) ~ .reset {
 		  <p class="text">{{tool[key]['description']}}</p>
 		</a>
 		</div>
-        <!--<div class="tools__item">
+        <div class="tools__item">
             <a href="{{key}}" class="heading" title="{{tool[key]['title']}}">
                 <div class="tools__item__icon">
                     <i class="ico ico--{{ico[0]}}"></i>
@@ -236,10 +188,10 @@ input:not(:placeholder-shown) ~ .reset {
                     <p>{{tool[key]['description']}}</p>
                 </div>
             </a>
-        </div>--->
+        </div>
         {%endfor%}
         
-    </div>
+    </div>--->
 </div>
 
 <div class="block block--white">
