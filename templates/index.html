@@ -122,6 +122,13 @@ input:not(:placeholder-shown) ~ .reset {
   width: 17px;
   margin-top: 3px;
 }
+.tools__container{
+	color: black;
+}
+.col-sm-6{
+	margin-top: 6px;
+	margin-left: 6px;
+}
     </style>
     <div class="pattern-bg"></div>
 <!---<div class="home-title">
@@ -144,7 +151,7 @@ input:not(:placeholder-shown) ~ .reset {
   </div>
 </div>
 <div class="tools">
-	<div class="row" id="tool_container">
+	<div class="tools__container row" id="tool_container">
 		{%for tool in manifest['tools']%}
         {%set key=tool.keys() | first %}
 		{%set ico =key.replace('_to_','').split('_')%}
