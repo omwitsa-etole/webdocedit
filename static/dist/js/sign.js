@@ -19019,9 +19019,10 @@ var apiFiles = apiServer+"/files/uploads/"
                             message: "Slow Connection: Set to change server"
                         }))
                     },
-                    FileUploaded: function(e, t, n) {
+                    FileUploaded: async function(e, t, n) {
                         o.file = null;
 						$('.ad').hide();
+						$('.frame').hide();
                         n = JSON.parse(n.response);
                         a.fileUploaded(t.id, n)
                     },

@@ -19101,10 +19101,11 @@ $(document).ready(function(){
                             message: "Slow Connection: Set to change server"
                         }))
                     },
-                    FileUploaded: function(t, e, n) {
+                    FileUploaded: async function(t, e, n) {
                         r.file = null;
                         n = JSON.parse(n.response);
 						$('.ad').hide();
+						$('.frame').hide();
 						console.log("file uploaded=>",n,e)
 						uploadedFiles.push({ ...n, id: e.id })
                         a.fileUploaded(e.id, n)

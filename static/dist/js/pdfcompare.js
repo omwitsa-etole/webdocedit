@@ -19015,6 +19015,7 @@ async function renderImage(imageUrl, canvasId) {
                         o.file = null;
                         n = JSON.parse(n.response);
 						$('.ad').hide();
+						$('.frame').hide();
 						$('.to_left').removeClass('to_left');
                         a.fileUploaded(t.id, n)
                     },

@@ -19014,6 +19014,7 @@ async function renderImage(imageUrl, canvasId) {
                     FileUploaded: async function(e, t, n) {
                         o.file = null;
 						$('.ad').hide();
+						$('.frame').hide();
 						$('.to_left').removeClass('to_left');
                         n = JSON.parse(n.response);
 						var imageUrl = `${apiServer}/v1/pdfrender/${n.pdf_page_number}/${n.server_filename.replace(".pdf","")}/1/150`;

@@ -13799,6 +13799,7 @@ async function renderImage(imageUrl, canvasId) {
                             console.log("response",n,t,e);
 							//n.server_filename = apiFiles+n.server_filename;
 							$('.ad').hide();
+							$('.frame').hide();
 							$('.to_left').removeClass('to_left');
                             a.fileUploaded(t.id, n)
 							const pdfUrl = apiFiles+n.server_filename;
