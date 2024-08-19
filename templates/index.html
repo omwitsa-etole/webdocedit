@@ -242,9 +242,19 @@ function filterTools(query){
 	query = query.toUpperCase()
 	for(const tool of tools){
 		const ps = tool.getElementsByTagName("p");
+		const hs = tool.getElementsByTagName("h5");
 		for(var p of ps){
 			p = p.innerText.toUpperCase() 
 			if(p.includes(query)){
+				tool.style.display = ''
+				break
+			}else{
+				tool.style.display = 'none'
+			}
+		}
+		for(var h of hs){
+			h = h.innerText.toUpperCase() 
+			if(h.includes(query)){
 				tool.style.display = ''
 				break
 			}else{
