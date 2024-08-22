@@ -103,6 +103,8 @@ def get_ip():
         ip_address = forwarded_for.split(',')[0]
     else:
         ip_address = request.remote_addr
+        
+    return ip_address
 
 @app.before_request
 async def before_request_func():
@@ -224,13 +226,14 @@ def get_paypal_access_token():
         
 @app.route("/paypal/cancel",methods=["POST","GET"])
 def paypal_cancel():
-    print("response=>",response.json if response.json else {})
-    return "Cancelled Response"
+    #print("response=>",response.json if response.json else {})
+    return "Cancelled Response <a href='https://www.webdocedit.com/'>home</a>"
     
 @app.route("/paypal/success",methods=["POST","GET"])
 def paypal_success():
-    print("response=>",response.json if response.json else {})
-    return "Success Response"
+    print(response)
+    #print("response=>",response.json if response.json else {})
+    return "Success Response <a href='https://www.webdocedit.com/'>home</a>"
 
 @app.route("/paypal/create",methods=["POST"])
 def paypal_pay():
