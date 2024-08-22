@@ -338,7 +338,9 @@ def user():
     if session["manifest"].get("user") == None or session["manifest"]["user"].get("authentication") == None:
         return redirect(url_for("logout"))
     return render_template("user.html",manifest=session["manifest"])
-
+@app.route("/user/team/register",methods=["GET","POST"])
+def register_team():
+    return render_template("register.html",manifest=session["manifest"])
 @app.route("/user/premium")
 def user_premium():
     if session["manifest"].get("user") == None or session["manifest"]["user"].get("authentication") == None:
