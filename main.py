@@ -338,6 +338,13 @@ def user():
     if session["manifest"].get("user") == None or session["manifest"]["user"].get("authentication") == None:
         return redirect(url_for("logout"))
     return render_template("user.html",manifest=session["manifest"])
+    
+@app.route("/sample_files/team/<string:name>")
+def sample_file(name):
+    try:
+        return render_template(name,manifest=session["manifest"])
+    except Exception as e:
+        return "NOT FOUND"
 @app.route("/user/team/register",methods=["GET","POST"])
 def register_team():
     return render_template("register.html",manifest=session["manifest"])
