@@ -461,60 +461,66 @@ def logout():
     
 @app.route("/login/callback")
 def callback():
-    code = request.args.get("code")
-    GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
-   
+    try:
+        
+        code = request.args.get("code")
+        GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
+       
 
-    google_provider_cfg = get_google_provider_cfg()
-    token_endpoint = google_provider_cfg["token_endpoint"]
+        google_provider_cfg = get_google_provider_cfg()
+        token_endpoint = google_provider_cfg["token_endpoint"]
 
-    token_url, headers, body = client.prepare_token_request(
-        token_endpoint,
-        authorization_response=request.url,
-        redirect_url=request.base_url,
-        code=code
-    )
-    token_response = requests.post(
-        token_url,
-        headers=headers,
-        data=body,
-        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
-    )
-    print("token response",token_response.text)
-    client.parse_request_body_response(token_response.text)
+        token_url, headers, body = client.prepare_token_request(
+            token_endpoint,
+            authorization_response=request.url,
+            redirect_url=request.base_url,
+            code=code
+        )
+        token_response = requests.post(
+            token_url,
+            headers=headers,
+            data=body,
+            auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+        )
+        print("token response",token_response.text)
+        client.parse_request_body_response(token_response.text)
 
-    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
-    uri, headers, body = client.add_token(userinfo_endpoint)
-    userinfo_response = requests.get(uri, headers=headers, data=body)
+        userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+        uri, headers, body = client.add_token(userinfo_endpoint)
+        userinfo_response = requests.get(uri, headers=headers, data=body)
 
-    if userinfo_response.json().get("email_verified"):
-        unique_id = userinfo_response.json()["sub"]
-        users_email = userinfo_response.json()["email"]
-        picture = userinfo_response.json()["picture"]
-        users_name = userinfo_response.json()["name"]
-        headers = {
-                #'Authorization': f'Bearer {access_token}',
-                'Content-Type': 'application/json'
-            }
-        data = {'email':users_email,'password':"google","name": users_name}
-        response = requests.post(apiServer+"/api/auth", headers=headers, data=json.dumps(data))
-        if response.status_code != 200:
-            #return response.json().get('access_token')
-            print(response.content)
-            return redirect("login?message="+str(response.content))
-        result = response.json()
-        session['google_id'] = unique_id
-        session["manifest"]["user"]['name'] = users_name
-        session["manifest"]["user"]['email'] = users_email
-        session["manifest"]["user"]['picture'] = picture
-        session["manifest"]["user"]["authentication"] = "google"
-        session["manifest"]["user"]["token"] = result.get('token')
-        session["user"] =session["manifest"]["user"]
-        print("user=>",session["manifest"]["user"])
-    else:
-        return "User email not available or not verified by Google.", 400
+        if userinfo_response.json().get("email_verified"):
+            unique_id = userinfo_response.json()["sub"]
+            users_email = userinfo_response.json()["email"]
+            picture = userinfo_response.json()["picture"]
+            users_name = userinfo_response.json()["name"]
+            headers = {
+                    #'Authorization': f'Bearer {access_token}',
+                    'Content-Type': 'application/json'
+                }
+            data = {'email':users_email,'password':"google","name": users_name}
+            response = requests.post(apiServer+"/api/auth", headers=headers, data=json.dumps(data))
+            if response.status_code != 200:
+                #return response.json().get('access_token')
+                print(response.content)
+                return redirect("login?message="+str(response.content))
+            result = response.json()
+            session['google_id'] = unique_id
+            session["manifest"]["user"]['name'] = users_name
+            session["manifest"]["user"]['email'] = users_email
+            session["manifest"]["user"]['picture'] = picture
+            session["manifest"]["user"]["authentication"] = "google"
+            session["manifest"]["user"]["token"] = result.get('token')
+            session["user"] =session["manifest"]["user"]
+            print("user=>",session["manifest"]["user"])
+        else:
+            return "User email not available or not verified by Google.", 400
 
-    return redirect(url_for("user"))
+        return redirect(url_for("user"))
+    except Exception as e:
+        print("error=>callback=>",str(e))
+        pass
+    return redirect("/login?msg=Register manually to proceed")
 
 @app.route("/login",methods=["GET","POST"])
 def login():
