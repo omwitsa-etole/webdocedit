@@ -137,7 +137,7 @@ async def before_request_func():
                 {"sign_pdf":{"title":"Sign PDF","svg":"","description":"Your tool to eSign documents. Sign a document yourself or send a signature request to others.","new":True,"category":"PDF SECURITY"}},
                 {"protect_pdf":{"title":"Encrypt PDF","svg":"","description":"Encrypt your PDF with a password to keep sensitive data confidential.","new":True,"category":"PDF SECURITY"}},
                 {"unlock_pdf":{"title":"Decrypt PDF","svg":"","description":"Remove PDF password security, giving you the freedom to use your PDFs as you want.","new":True,"category":"PDF SECURITY"}},
-                {"edit_pdf":{"title":"Edit PDF","svg":"","description":"Edit PDF by adding text, shapes, comments and highlights. Your secure and simple tool to edit PDF.","new":True,"category":"EDIT PDF"}},
+                #{"edit_pdf":{"title":"Edit PDF","svg":"","description":"Edit PDF by adding text, shapes, comments and highlights. Your secure and simple tool to edit PDF.","new":True,"category":"EDIT PDF"}},
                 {"pdf_to_audio":{"title":"PDF to MP3","svg":"","description":"Convert PDF text into an audio format that you can listen to effectively.","new":True,"category":"CONVERT FROM PDF"}}
             ],
             "categories":["ORGANIZE PDF","OPTIMIZE PDF","CONVERT TO PDF","CONVERT FROM PDF","EDIT PDF","PDF SECURITY"]
