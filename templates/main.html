@@ -128,13 +128,14 @@ crossorigin="anonymous"></script>
 }
 .to_left{
 	position:absolute;
-	left: 0;
-	width: 45%;
+	left: 50%;
+	top: 50%;
+	
+	width: 100%;
+	transform: translate(-50%,-50%);
 }
-.to_left .uploader{
-	position: absolute;
-	left: 100%;
-	top: 0;
+.uploader__extra{
+	margin-left: -25px;
 }
 @media screen and (max-width: 800px) {
 	.to_left{
@@ -166,19 +167,7 @@ crossorigin="anonymous"></script>
 	}
 }
 .frame {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 300px;
-	height: 260px;
-	border-radius: 3px;
-	box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
-	background: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	flex-direction: column;
+	
 }
 
 .title {
@@ -231,6 +220,9 @@ h1 {
 .btn:hover {
 	background: rebeccapurple;
 	box-shadow: 0 3px 0 0 deeppink;
+}
+#uploadDisk {
+    display: flex !important;
 }
 
 </style>
