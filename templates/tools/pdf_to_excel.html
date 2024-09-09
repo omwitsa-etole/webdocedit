@@ -15,6 +15,54 @@
     
 
 <div class="tool">
+	<div id="sidebar" class="tool__sidebar">
+        <div class="option__panel option__panel--active" id="merge-options">
+            <div class="option__panel__title">PDF to Excel</div>
+                <div class="option__panel__content scannedMultiple">
+            <div class="info">
+                Some of your files contain scanned pages. To extract all text from your files, <strong data-toggle="modal" data-target="#ocrInfo">OCR</strong> is needed.            </div>
+        </div>
+        <div class="option__panel__content scanned">
+            <div class="info">
+                Looks like you are trying to process a PDF containing some scanned pages. To extract all text from your file, <strong data-toggle="modal" data-target="#ocrInfo">OCR</strong> is needed.            </div>
+        </div>
+        <div class="options" id="ocr-options">
+            <ul class="option__select" data-action="null">
+                <li class="option__select__item option--active" data-name="ocr" data-value="0">
+                    <div class="option__select__item__title">
+                        No OCR                    </div>
+                    <div class="option__description">
+                        Convert PDFs with selectable text into editable Excel files.                    </div>
+                </li>
+                <li class="option__select__item" data-name="ocr" data-value="1" data-action="premiumfeature">
+                    <div class="option__select__item__title">
+                        OCR                                                    <span class="badge badge--premium">
+                                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0ZM5.115 11.507 4.447 7.02c-.012-.101.049-.194.136-.208a.141.141 0 0 1 .092.016l2.595 1.448c.074.041.162.012.206-.069l2.279-4.23c.046-.087.145-.113.22-.06.02.015.036.033.049.055l2.44 4.243c.045.077.13.104.202.065l2.662-1.455c.08-.043.175-.004.213.088a.21.21 0 0 1 .014.105l-.684 4.49c-.01.092-.078.16-.158.16H5.274c-.08 0-.148-.068-.159-.16Zm.996 1.632a.75.75 0 0 0 0 1.5h7.778a.75.75 0 0 0 0-1.5H6.11Z" fill="#47474F"></path></svg>Premium</span>
+                                            </div>
+                    <div class="option__description">
+                        Convert scanned PDFs with non-selectable text into editable Excel files.                    </div>
+                </li>
+            </ul>
+        </div>
+        <input type="hidden" name="convert_to" value="xlsx" class="option">
+    <div class="option__panel__content">
+        <div class="gobutton">Click on CONVERT button</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ocrInfo" tabindex="-1" role="dialog" aria-labelledby="ocrInfo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="dialog__container dialog__container--appeared">
+            <div class="dialog__body">
+                <h5 class="dialog__title" id="exampleModalLongTitle">OCR</h5>
+                <div class="dialog__close" data-dismiss="modal" aria-label="Close"></div>
+                <p>Optical Character Recognition converts non-selectable text from scanned documents into editable Office files.</p>
+                <p>Supported languages: English, Danish, Dutch, Finnish, French, German, Italian, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish and Turkish</p>
+            </div>
+        </div>
+    </div>
+</div>    </div>
     <div class="tool__workarea" id="workArea">
 <div class="to_left frame">
 
@@ -75,54 +123,7 @@
                         </div>        <div class="tool__workarea__rendered" id="fileGroups"></div>
     </div>
 	
-    <div id="sidebar" class="tool__sidebar">
-        <div class="option__panel option__panel--active" id="merge-options">
-            <div class="option__panel__title">PDF to Excel</div>
-                <div class="option__panel__content scannedMultiple">
-            <div class="info">
-                Some of your files contain scanned pages. To extract all text from your files, <strong data-toggle="modal" data-target="#ocrInfo">OCR</strong> is needed.            </div>
-        </div>
-        <div class="option__panel__content scanned">
-            <div class="info">
-                Looks like you are trying to process a PDF containing some scanned pages. To extract all text from your file, <strong data-toggle="modal" data-target="#ocrInfo">OCR</strong> is needed.            </div>
-        </div>
-        <div class="options" id="ocr-options">
-            <ul class="option__select" data-action="null">
-                <li class="option__select__item option--active" data-name="ocr" data-value="0">
-                    <div class="option__select__item__title">
-                        No OCR                    </div>
-                    <div class="option__description">
-                        Convert PDFs with selectable text into editable Excel files.                    </div>
-                </li>
-                <li class="option__select__item" data-name="ocr" data-value="1" data-action="premiumfeature">
-                    <div class="option__select__item__title">
-                        OCR                                                    <span class="badge badge--premium">
-                                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0ZM5.115 11.507 4.447 7.02c-.012-.101.049-.194.136-.208a.141.141 0 0 1 .092.016l2.595 1.448c.074.041.162.012.206-.069l2.279-4.23c.046-.087.145-.113.22-.06.02.015.036.033.049.055l2.44 4.243c.045.077.13.104.202.065l2.662-1.455c.08-.043.175-.004.213.088a.21.21 0 0 1 .014.105l-.684 4.49c-.01.092-.078.16-.158.16H5.274c-.08 0-.148-.068-.159-.16Zm.996 1.632a.75.75 0 0 0 0 1.5h7.778a.75.75 0 0 0 0-1.5H6.11Z" fill="#47474F"></path></svg>Premium</span>
-                                            </div>
-                    <div class="option__description">
-                        Convert scanned PDFs with non-selectable text into editable Excel files.                    </div>
-                </li>
-            </ul>
-        </div>
-        <input type="hidden" name="convert_to" value="xlsx" class="option">
-    <div class="option__panel__content">
-        <div class="gobutton">Click on CONVERT button</div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="ocrInfo" tabindex="-1" role="dialog" aria-labelledby="ocrInfo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="dialog__container dialog__container--appeared">
-            <div class="dialog__body">
-                <h5 class="dialog__title" id="exampleModalLongTitle">OCR</h5>
-                <div class="dialog__close" data-dismiss="modal" aria-label="Close"></div>
-                <p>Optical Character Recognition converts non-selectable text from scanned documents into editable Office files.</p>
-                <p>Supported languages: English, Danish, Dutch, Finnish, French, German, Italian, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish and Turkish</p>
-            </div>
-        </div>
-    </div>
-</div>    </div>
+    
 </div>
 
 <div id="uploading" class="uploading">

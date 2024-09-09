@@ -16,7 +16,28 @@
 <div class="main">
     
     <div class="tool tool--small">
-
+		{%if tool%}
+            
+            
+		<div id="sidebar" class="tool__sidebar">
+                <div class="option__panel option__panel--active" id="merge-options">
+                <div class="option__panel__title">{{tool["title"]}}</div>
+                <div class="option__panel__content">
+                    <div class="info drag">To change the order of your PDFs, drag and drop the files as you want.</div>
+                    <div class="info multiple">Please, select more PDF files by clicking again on ’Select PDF files’. <br>Select multiple files by mantaining pressed ’Ctrl’</div>
+                    <div class="multiple hidden">Please, select more PDF files</div>
+				</div>
+				
+                </div>    
+            </div>
+		{%else%}
+		<div id="sidebar" class="tool__sidebar">
+			<div class="option__panel option__panel--active" id="merge-options">
+			<div class="option__panel__title">Tool not Available</div>
+			
+			</div>    
+		</div>
+		{%endif%}
         <div class="tool__workarea" id="workArea">
             {%if tool%}
 		<div class="to_left frame">
@@ -83,26 +104,7 @@
                 </div>
             {%endif%}
         </div>
-            {%if tool%}
-            <div id="sidebar" class="tool__sidebar">
-                <div class="option__panel option__panel--active" id="merge-options">
-                <div class="option__panel__title">{{tool["title"]}}</div>
-                <div class="option__panel__content">
-                    <div class="info drag">To change the order of your PDFs, drag and drop the files as you want.</div>
-                    <div class="info multiple">Please, select more PDF files by clicking again on ’Select PDF files’. <br>Select multiple files by mantaining pressed ’Ctrl’</div>
-                    <div class="multiple hidden">Please, select more PDF files</div>
-				</div>
-				
-                </div>    
-            </div>
-            {%else%}
-            <div id="sidebar" class="tool__sidebar">
-                <div class="option__panel option__panel--active" id="merge-options">
-                <div class="option__panel__title">Tool not Available</div>
-                
-                </div>    
-            </div>
-            {%endif%}
+            
     </div>
 	
     

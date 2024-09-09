@@ -14,6 +14,21 @@
 <div class="main">
     
 <div class="tool">
+	<div id="sidebar" class="tool__sidebar">
+        <div class="option__panel option__panel--active" id="merge-options">
+            <div class="option__panel__title">PDF to PowerPoint</div>
+            <input type="hidden" name="convert_to" value="pptx" class="option">
+    <div class="option__panel__content">
+        <div class="gobutton">Click on CONVERT button</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ocrInfo" tabindex="-1" role="dialog" aria-labelledby="ocrInfo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        
+    </div>
+</div>    </div>
     <div class="tool__workarea" id="workArea">
 <div class="to_left frame">
 
@@ -74,28 +89,7 @@
                         </div>        <div class="tool__workarea__rendered" id="fileGroups"></div>
     </div>
 	
-    <div id="sidebar" class="tool__sidebar">
-        <div class="option__panel option__panel--active" id="merge-options">
-            <div class="option__panel__title">PDF to PowerPoint</div>
-            <input type="hidden" name="convert_to" value="pptx" class="option">
-    <div class="option__panel__content">
-        <div class="gobutton">Click on CONVERT button</div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="ocrInfo" tabindex="-1" role="dialog" aria-labelledby="ocrInfo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="dialog__container dialog__container--appeared">
-            <div class="dialog__body">
-                <h5 class="dialog__title" id="exampleModalLongTitle">OCR</h5>
-                <div class="dialog__close" data-dismiss="modal" aria-label="Close"></div>
-                <p>Optical Character Recognition converts non-selectable text from scanned documents into editable Office files.</p>
-                <p>Supported languages: English, Danish, Dutch, Finnish, French, German, Italian, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish and Turkish</p>
-            </div>
-        </div>
-    </div>
-</div>    </div>
+    
 </div>
 
 <div id="uploading" class="uploading">

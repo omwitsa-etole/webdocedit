@@ -14,78 +14,7 @@
 <div class="main">
     
 <div class="tool">
-    <div class="tool__workarea" id="workArea">
-<div class="to_left">
-        <div id="dropArea"></div>
-        <div class="tool__header">
-            <h1 class="tool__header__title">{{tool["title"]}}</h1>
-            <h2 class="tool__header__subtitle">{{tool["description"]}}</h2>
-        </div>
-        <div id="uploader" class="uploader">
-			<a class="uploader__btn tooltip--left active" id="pickfiles" href="javascript:;" title="Add more files" data-title="Add more files" style="position: relative; z-index: 1;">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="none" stroke-linejoin="round"><desc>Upload your file and transform it.</desc><path d="M10 1.833v16.333"></path><path d="M1.833 10h16.333"></path></svg>
-				<span>Select HTML file</span>
-			</a><br>
-            <button data-toggle="modal" data-target="#htmlModal" data-whatever="@mdo" class="btn uploader__btn active">
-                <span>Add HTML</span>
-            </button>
-			<div id="html5_1i354svgo1j5o3tr1fq41c0v1b154_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 330px; height: 80px; overflow: hidden; z-index: 0;"><input id="html5_1i354svgo1j5o3tr1fq41c0v1b154" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" accept=".pdf" tabindex="-1"></div>
-		<div style="width: 300px;height: 300px; " class="ad">
-					<ins class="adsbygoogle"
-					 style="display:block"
-					 data-ad-client="ca-pub-8402082494280043"
-					 data-ad-slot="4802682499"
-					 data-ad-format="auto"
-					 ></ins>
-				<script>
-					 (adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-
-		</div>	
-        </div>
-</div>          
-        <div class="tool__workarea__rendered editor" id="editor">
-            <div class="editor__content">
-            </div>
-        </div>
-        <div class="waitMsg">
-            <div class="title2">Creating preview</div>
-            <img src="/static/img/svg_icons/preload2.svg">
-            <div class="title3">
-                <div class="waitMsg_message">Accessing URL ...</div>
-                <div class="waitMsg_message">This may take a while ...</div>
-                <div class="waitMsg_message">We will scan all the URL content ...</div>
-                <div class="waitMsg_message">
-                    ... to provide you with the best conversion quality                </div>
-            </div>
-            <p>(Click 'Convert HTML' button to convert your webpage without generating a preview)</p>
-        </div>
-        <div class="waitMsgError">
-            <div class="title2">Unable to access URL</div>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95" height="95">
-                <defs>
-                    <circle id="A" cx="44.5" cy="44.5" r="44.5"></circle>
-                    <filter x="-6.2%" y="-3.9%" width="112.4%" height="112.4%" id="B">
-                        <feOffset dy="2" in="SourceAlpha"></feOffset>
-                        <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
-                        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
-                    </filter>
-                </defs>
-                <g transform="translate(3 1)" fill-rule="evenodd">
-                    <use fill="#000" filter="url(#B)" xlink:href="#A"></use>
-                    <use fill="#ff6a58" xlink:href="#A"></use>
-                    <g fill="#fff">
-                        <path d="M43.73 46.92V34.04h2.376v12.88H43.73zm0 6.48v-3.348h2.376V53.4H43.73z"></path>
-                        <path d="M44.5 19.235L22.34 60.6h44.32L44.5 19.235zm1.763-.944l22.16 41.365A2 2 0 0 1 66.66 62.6H22.34a2 2 0 0 1-1.763-2.944l22.16-41.365a2 2 0 0 1 3.526 0z" fill-rule="nonzero"></path>
-                    </g>
-                </g>
-            </svg>
-            <p>The webpage you are trying to access <strong>can't be found</strong> or has <strong>connectivity issues</strong>.</p>
-            <p>Please check if URL is properly written and try again.</p>
-        </div>
-    </div>
-	
-    <div id="sidebar" class="tool__sidebar">
+	<div id="sidebar" class="tool__sidebar">
         <div class="option__panel option__panel--active" id="merge-options">
     <div class="option__panel__title">HTML to PDF</div>
     <div class="option__panel__content">
@@ -389,6 +318,78 @@
         -->
     </div>
 </div>    </div>
+    <div class="tool__workarea" id="workArea">
+<div class="to_left">
+        <div id="dropArea"></div>
+        <div class="tool__header">
+            <h1 class="tool__header__title">{{tool["title"]}}</h1>
+            <h2 class="tool__header__subtitle">{{tool["description"]}}</h2>
+        </div>
+        <div id="uploader" class="uploader">
+			<a class="uploader__btn tooltip--left active" id="pickfiles" href="javascript:;" title="Add more files" data-title="Add more files" style="position: relative; z-index: 1;">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-linecap="round" stroke-width="2" stroke="#fff" fill="none" stroke-linejoin="round"><desc>Upload your file and transform it.</desc><path d="M10 1.833v16.333"></path><path d="M1.833 10h16.333"></path></svg>
+				<span>Select HTML file</span>
+			</a><br>
+            <button data-toggle="modal" data-target="#htmlModal" data-whatever="@mdo" class="btn uploader__btn active">
+                <span>Add HTML</span>
+            </button>
+			<div id="html5_1i354svgo1j5o3tr1fq41c0v1b154_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 330px; height: 80px; overflow: hidden; z-index: 0;"><input id="html5_1i354svgo1j5o3tr1fq41c0v1b154" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" accept=".pdf" tabindex="-1"></div>
+		<div style="width: 300px;height: 300px; " class="ad">
+					<ins class="adsbygoogle"
+					 style="display:block"
+					 data-ad-client="ca-pub-8402082494280043"
+					 data-ad-slot="4802682499"
+					 data-ad-format="auto"
+					 ></ins>
+				<script>
+					 (adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+		</div>	
+        </div>
+</div>          
+        <div class="tool__workarea__rendered editor" id="editor">
+            <div class="editor__content">
+            </div>
+        </div>
+        <div class="waitMsg">
+            <div class="title2">Creating preview</div>
+            <img src="/static/img/svg_icons/preload2.svg">
+            <div class="title3">
+                <div class="waitMsg_message">Accessing URL ...</div>
+                <div class="waitMsg_message">This may take a while ...</div>
+                <div class="waitMsg_message">We will scan all the URL content ...</div>
+                <div class="waitMsg_message">
+                    ... to provide you with the best conversion quality                </div>
+            </div>
+            <p>(Click 'Convert HTML' button to convert your webpage without generating a preview)</p>
+        </div>
+        <div class="waitMsgError">
+            <div class="title2">Unable to access URL</div>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95" height="95">
+                <defs>
+                    <circle id="A" cx="44.5" cy="44.5" r="44.5"></circle>
+                    <filter x="-6.2%" y="-3.9%" width="112.4%" height="112.4%" id="B">
+                        <feOffset dy="2" in="SourceAlpha"></feOffset>
+                        <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
+                        <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+                    </filter>
+                </defs>
+                <g transform="translate(3 1)" fill-rule="evenodd">
+                    <use fill="#000" filter="url(#B)" xlink:href="#A"></use>
+                    <use fill="#ff6a58" xlink:href="#A"></use>
+                    <g fill="#fff">
+                        <path d="M43.73 46.92V34.04h2.376v12.88H43.73zm0 6.48v-3.348h2.376V53.4H43.73z"></path>
+                        <path d="M44.5 19.235L22.34 60.6h44.32L44.5 19.235zm1.763-.944l22.16 41.365A2 2 0 0 1 66.66 62.6H22.34a2 2 0 0 1-1.763-2.944l22.16-41.365a2 2 0 0 1 3.526 0z" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </svg>
+            <p>The webpage you are trying to access <strong>can't be found</strong> or has <strong>connectivity issues</strong>.</p>
+            <p>Please check if URL is properly written and try again.</p>
+        </div>
+    </div>
+	
+    
 
     <button id="settingsRefresh" class="btn btn--secondary btn--sm htmlpdf"><span>Preview</span>
         <svg width="16px" height="11px" viewBox="0 0 16 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

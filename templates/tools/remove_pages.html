@@ -15,6 +15,24 @@
     
 
     <div class="tool">
+		<div id="sidebar" class="tool__sidebar">
+            <div class="option__panel option__panel--active" id="remove">
+        <div class="option__panel__title">Remove pages</div>
+        <div class="option__panel__content">
+            <div class="info">Click on pages to remove from document. You can use "shift" key to set ranges.        </div>
+            <p>Total pages: <span class="numPages"></span></p>
+            <div class="form__group">
+                <label>Pages to remove:</label>
+                <input type="text" name="remove_pages" id="remove_pages" placeholder="example: 1,5-8">
+            </div>
+    
+    
+            <input class="option" type="hidden" name="split_mode" value="remove_pages">
+            <input class="option" type="hidden" name="merge_after" value="false">
+    
+            <div class="gobutton">Click on SPLIT PDF button</div>
+        </div>
+    </div>    </div>
         <div class="tool__workarea" id="workArea">
 <div class="to_left frame">
 
@@ -76,24 +94,7 @@
             <div class="tool__workarea__rendered" id="split-remove"></div>
         </div>
 		
-        <div id="sidebar" class="tool__sidebar">
-            <div class="option__panel option__panel--active" id="remove">
-        <div class="option__panel__title">Remove pages</div>
-        <div class="option__panel__content">
-            <div class="info">Click on pages to remove from document. You can use "shift" key to set ranges.        </div>
-            <p>Total pages: <span class="numPages"></span></p>
-            <div class="form__group">
-                <label>Pages to remove:</label>
-                <input type="text" name="remove_pages" id="remove_pages" placeholder="example: 1,5-8">
-            </div>
-    
-    
-            <input class="option" type="hidden" name="split_mode" value="remove_pages">
-            <input class="option" type="hidden" name="merge_after" value="false">
-    
-            <div class="gobutton">Click on SPLIT PDF button</div>
-        </div>
-    </div>    </div>
+        
     </div>
     
     <div id="uploading" class="uploading">
